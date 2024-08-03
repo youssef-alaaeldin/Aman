@@ -8,12 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		0B728E1F2C5DF8750012625A /* AmanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E1E2C5DF8750012625A /* AmanApp.swift */; };
-		0B728E212C5DF8750012625A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E202C5DF8750012625A /* ContentView.swift */; };
+		0B728E212C5DF8750012625A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E202C5DF8750012625A /* OnboardingView.swift */; };
 		0B728E232C5DF8770012625A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E222C5DF8770012625A /* Assets.xcassets */; };
 		0B728E262C5DF8770012625A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E252C5DF8770012625A /* Preview Assets.xcassets */; };
 		0B728E302C5DF8780012625A /* AmanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E2F2C5DF8780012625A /* AmanTests.swift */; };
 		0B728E3A2C5DF8780012625A /* AmanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E392C5DF8780012625A /* AmanUITests.swift */; };
 		0B728E3C2C5DF8780012625A /* AmanUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E3B2C5DF8780012625A /* AmanUITestsLaunchTests.swift */; };
+		0B728E4E2C5DF90D0012625A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E4D2C5DF90D0012625A /* Colors.swift */; };
+		0B728E652C5E088D0012625A /* FontStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E642C5E088D0012625A /* FontStyles.swift */; };
+		0B728E782C5E12B50012625A /* SFPRODISPLAYULTRALIGHTITALIC.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E6F2C5E12B50012625A /* SFPRODISPLAYULTRALIGHTITALIC.OTF */; };
+		0B728E792C5E12B50012625A /* SFPRODISPLAYMEDIUM.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E702C5E12B50012625A /* SFPRODISPLAYMEDIUM.OTF */; };
+		0B728E7A2C5E12B50012625A /* SFPRODISPLAYBOLD.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E712C5E12B50012625A /* SFPRODISPLAYBOLD.OTF */; };
+		0B728E7B2C5E12B50012625A /* SFPRODISPLAYBLACKITALIC.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E722C5E12B50012625A /* SFPRODISPLAYBLACKITALIC.OTF */; };
+		0B728E7C2C5E12B50012625A /* SFPRODISPLAYSEMIBOLDITALIC.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E732C5E12B50012625A /* SFPRODISPLAYSEMIBOLDITALIC.OTF */; };
+		0B728E7D2C5E12B50012625A /* SFPRODISPLAYREGULAR.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E742C5E12B50012625A /* SFPRODISPLAYREGULAR.OTF */; };
+		0B728E7E2C5E12B50012625A /* SFPRODISPLAYTHINITALIC.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E752C5E12B50012625A /* SFPRODISPLAYTHINITALIC.OTF */; };
+		0B728E7F2C5E12B50012625A /* SFPRODISPLAYLIGHTITALIC.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E762C5E12B50012625A /* SFPRODISPLAYLIGHTITALIC.OTF */; };
+		0B728E802C5E12B50012625A /* SFPRODISPLAYHEAVYITALIC.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E772C5E12B50012625A /* SFPRODISPLAYHEAVYITALIC.OTF */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +47,7 @@
 /* Begin PBXFileReference section */
 		0B728E1B2C5DF8750012625A /* Aman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B728E1E2C5DF8750012625A /* AmanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmanApp.swift; sourceTree = "<group>"; };
-		0B728E202C5DF8750012625A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0B728E202C5DF8750012625A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		0B728E222C5DF8770012625A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B728E252C5DF8770012625A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0B728E2B2C5DF8780012625A /* AmanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +55,18 @@
 		0B728E352C5DF8780012625A /* AmanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B728E392C5DF8780012625A /* AmanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmanUITests.swift; sourceTree = "<group>"; };
 		0B728E3B2C5DF8780012625A /* AmanUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmanUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0B728E4D2C5DF90D0012625A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		0B728E632C5E07920012625A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0B728E642C5E088D0012625A /* FontStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyles.swift; sourceTree = "<group>"; };
+		0B728E6F2C5E12B50012625A /* SFPRODISPLAYULTRALIGHTITALIC.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYULTRALIGHTITALIC.OTF; sourceTree = "<group>"; };
+		0B728E702C5E12B50012625A /* SFPRODISPLAYMEDIUM.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYMEDIUM.OTF; sourceTree = "<group>"; };
+		0B728E712C5E12B50012625A /* SFPRODISPLAYBOLD.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYBOLD.OTF; sourceTree = "<group>"; };
+		0B728E722C5E12B50012625A /* SFPRODISPLAYBLACKITALIC.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYBLACKITALIC.OTF; sourceTree = "<group>"; };
+		0B728E732C5E12B50012625A /* SFPRODISPLAYSEMIBOLDITALIC.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYSEMIBOLDITALIC.OTF; sourceTree = "<group>"; };
+		0B728E742C5E12B50012625A /* SFPRODISPLAYREGULAR.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYREGULAR.OTF; sourceTree = "<group>"; };
+		0B728E752C5E12B50012625A /* SFPRODISPLAYTHINITALIC.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYTHINITALIC.OTF; sourceTree = "<group>"; };
+		0B728E762C5E12B50012625A /* SFPRODISPLAYLIGHTITALIC.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYLIGHTITALIC.OTF; sourceTree = "<group>"; };
+		0B728E772C5E12B50012625A /* SFPRODISPLAYHEAVYITALIC.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYHEAVYITALIC.OTF; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +117,14 @@
 		0B728E1D2C5DF8750012625A /* Aman */ = {
 			isa = PBXGroup;
 			children = (
+				0B728E632C5E07920012625A /* Info.plist */,
+				0B728E4C2C5DF8E10012625A /* Components */,
+				0B728E482C5DF8850012625A /* Model */,
+				0B728E4A2C5DF89C0012625A /* View */,
+				0B728E4B2C5DF8A10012625A /* ViewModel */,
 				0B728E1E2C5DF8750012625A /* AmanApp.swift */,
-				0B728E202C5DF8750012625A /* ContentView.swift */,
 				0B728E222C5DF8770012625A /* Assets.xcassets */,
+				0B728E622C5E07360012625A /* Fonts */,
 				0B728E242C5DF8770012625A /* Preview Content */,
 			);
 			path = Aman;
@@ -125,6 +153,53 @@
 				0B728E3B2C5DF8780012625A /* AmanUITestsLaunchTests.swift */,
 			);
 			path = AmanUITests;
+			sourceTree = "<group>";
+		};
+		0B728E482C5DF8850012625A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0B728E4A2C5DF89C0012625A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B728E202C5DF8750012625A /* OnboardingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0B728E4B2C5DF8A10012625A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0B728E4C2C5DF8E10012625A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0B728E4D2C5DF90D0012625A /* Colors.swift */,
+				0B728E642C5E088D0012625A /* FontStyles.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		0B728E622C5E07360012625A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0B728E722C5E12B50012625A /* SFPRODISPLAYBLACKITALIC.OTF */,
+				0B728E712C5E12B50012625A /* SFPRODISPLAYBOLD.OTF */,
+				0B728E772C5E12B50012625A /* SFPRODISPLAYHEAVYITALIC.OTF */,
+				0B728E762C5E12B50012625A /* SFPRODISPLAYLIGHTITALIC.OTF */,
+				0B728E702C5E12B50012625A /* SFPRODISPLAYMEDIUM.OTF */,
+				0B728E742C5E12B50012625A /* SFPRODISPLAYREGULAR.OTF */,
+				0B728E732C5E12B50012625A /* SFPRODISPLAYSEMIBOLDITALIC.OTF */,
+				0B728E752C5E12B50012625A /* SFPRODISPLAYTHINITALIC.OTF */,
+				0B728E6F2C5E12B50012625A /* SFPRODISPLAYULTRALIGHTITALIC.OTF */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,8 +306,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B728E7D2C5E12B50012625A /* SFPRODISPLAYREGULAR.OTF in Resources */,
+				0B728E802C5E12B50012625A /* SFPRODISPLAYHEAVYITALIC.OTF in Resources */,
+				0B728E7C2C5E12B50012625A /* SFPRODISPLAYSEMIBOLDITALIC.OTF in Resources */,
+				0B728E7F2C5E12B50012625A /* SFPRODISPLAYLIGHTITALIC.OTF in Resources */,
 				0B728E262C5DF8770012625A /* Preview Assets.xcassets in Resources */,
+				0B728E7B2C5E12B50012625A /* SFPRODISPLAYBLACKITALIC.OTF in Resources */,
 				0B728E232C5DF8770012625A /* Assets.xcassets in Resources */,
+				0B728E792C5E12B50012625A /* SFPRODISPLAYMEDIUM.OTF in Resources */,
+				0B728E7E2C5E12B50012625A /* SFPRODISPLAYTHINITALIC.OTF in Resources */,
+				0B728E7A2C5E12B50012625A /* SFPRODISPLAYBOLD.OTF in Resources */,
+				0B728E782C5E12B50012625A /* SFPRODISPLAYULTRALIGHTITALIC.OTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +341,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B728E212C5DF8750012625A /* ContentView.swift in Sources */,
+				0B728E212C5DF8750012625A /* OnboardingView.swift in Sources */,
+				0B728E4E2C5DF90D0012625A /* Colors.swift in Sources */,
+				0B728E652C5E088D0012625A /* FontStyles.swift in Sources */,
 				0B728E1F2C5DF8750012625A /* AmanApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,6 +511,7 @@
 				DEVELOPMENT_TEAM = 842ALSJDA7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Aman/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -454,6 +541,7 @@
 				DEVELOPMENT_TEAM = 842ALSJDA7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Aman/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
