@@ -10,8 +10,10 @@ import SwiftUI
 struct CustomButton: View {
     
     var label: String
+    var action: () -> Void
     var body: some View {
         Button {
+            action()
         } label: {
             Text(label)
                 .font(FontStyles.Body.mediumBold)
@@ -23,6 +25,6 @@ struct CustomButton: View {
     }
 }
 
-#Preview {
-    CustomButton(label: "Next")
-}
+//#Preview {
+//    CustomButton(label: "Next")
+//}
