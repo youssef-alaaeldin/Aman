@@ -45,6 +45,8 @@ struct OnboardingView: View {
         }
         .padding()
     }
+    
+    
     var slideView : some View {
         
         VStack(spacing: 40) {
@@ -57,19 +59,7 @@ struct OnboardingView: View {
                     
                 }
             }
-            
-            Button {
-                withAnimation {
-                    currentText = (currentText + 1) % elements.count
-                }
-            } label: {
-                Text(currentText == elements.count - 1 ? "Get Started" : "Next")
-                    .font(FontStyles.Body.mediumBold)
-                    .foregroundStyle(Colors.Neutrals.n50)
-            }
-            .frame(width: 343, height: 52)
-            .background(Colors.Primary.p500)
-            .clipShape(.rect(cornerRadius: 8))
+            CustomButton(label: currentText == elements.count - 1 ? "Get Started" : "Next")
         }
         .padding()
     }

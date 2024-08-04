@@ -27,6 +27,8 @@
 		0B728E802C5E12B50012625A /* SFPRODISPLAYHEAVYITALIC.OTF in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E772C5E12B50012625A /* SFPRODISPLAYHEAVYITALIC.OTF */; };
 		0B728E862C5E4FDD0012625A /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E852C5E4FDD0012625A /* RegisterView.swift */; };
 		0B728E892C5E50CE0012625A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E882C5E50CE0012625A /* CustomTextField.swift */; };
+		0B728E8D2C5E66D70012625A /* CustomCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E8C2C5E66D70012625A /* CustomCheckBox.swift */; };
+		0B728E8F2C5F8F380012625A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E8E2C5F8F380012625A /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		0B728E772C5E12B50012625A /* SFPRODISPLAYHEAVYITALIC.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFPRODISPLAYHEAVYITALIC.OTF; sourceTree = "<group>"; };
 		0B728E852C5E4FDD0012625A /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		0B728E882C5E50CE0012625A /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		0B728E8C2C5E66D70012625A /* CustomCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCheckBox.swift; sourceTree = "<group>"; };
+		0B728E8E2C5F8F380012625A /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				0B728E882C5E50CE0012625A /* CustomTextField.swift */,
+				0B728E8C2C5E66D70012625A /* CustomCheckBox.swift */,
+				0B728E8E2C5F8F380012625A /* CustomButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -358,6 +364,8 @@
 				0B728E212C5DF8750012625A /* OnboardingView.swift in Sources */,
 				0B728E862C5E4FDD0012625A /* RegisterView.swift in Sources */,
 				0B728E892C5E50CE0012625A /* CustomTextField.swift in Sources */,
+				0B728E8D2C5E66D70012625A /* CustomCheckBox.swift in Sources */,
+				0B728E8F2C5F8F380012625A /* CustomButton.swift in Sources */,
 				0B728E4E2C5DF90D0012625A /* Colors.swift in Sources */,
 				0B728E652C5E088D0012625A /* FontStyles.swift in Sources */,
 				0B728E1F2C5DF8750012625A /* AmanApp.swift in Sources */,
