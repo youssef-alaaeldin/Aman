@@ -15,47 +15,94 @@ struct RegisterView: View {
     @State var password = ""
     @State var isChecked = false
     
+    @EnvironmentObject private var coordinator: Coordinator
+    
     private let accountsImages = ["google", "facebook", "apple"]
     
     var body: some View {
         
         NavigationStack {
-            VStack (spacing: 16) {
-                
-                textFields
-                if isSignUp {
-                     policyAgreementForSignup
-                } else {
-                    forgetPassword
-                }
-                
-               
-                CustomButton(label: isSignUp ? "Register" : "Login", action: {
-                    //TODO: SIGN UP
-                })
+            ScrollView {
+                VStack (spacing: 16) {
+                    
+                    textFields
+                    if isSignUp {
+                        policyAgreementForSignup
+                    } else {
+                        forgetPassword
+                    }
+                    
+                    
+                    CustomButton(label: isSignUp ? "Register" : "Login", action: {
+                        //TODO: SIGN UP - LOGIN
+                        
+                        coordinator.push(.explore)
+                    })
                     .opacity(isChecked ? 1.0 : 0.5)
                     .disabled(!isChecked)
-                
-                signUpPart
-                
-                HStack {
-                    Text("Already have an account?")
-                    Button {
-                        withAnimation {
-                            isSignUp = false
-                        }
-                    } label: {
-                        Text("Login")
+                    
+                    if isSignUp {
+                        signUpPart
+                    } else {
+                        loginPart
                     }
+                    
+                    HStack {
+                        Text(isSignUp ? "Already have an account?" : "Don't have an account?")
+                        Button {
+                            withAnimation {
+                                isSignUp.toggle()
+                                reset()
+                            }
+                        } label: {
+                            Text(isSignUp ? "Login" : "Sign Up")
+                        }
+                    }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
+                .navigationTitle(isSignUp ? "Sign Up" : "Let's Login")
+                .padding()
             }
-            .navigationTitle(isSignUp ? "Sign Up" : "Let's Login")
-            .padding()
         }
         
         
+    }
+    
+    var loginPart: some View {
+        Group {
+            HStack(spacing: 16){
+                Rectangle()
+                    .frame(width: 110, height: 1)
+                    .foregroundStyle(Colors.Neutrals.n200)
+                
+                Text("Or Login With")
+                    .font(FontStyles.Body.smallRegular)
+                    .foregroundStyle(Colors.Neutrals.n900)
+                
+                Rectangle()
+                    .frame(width: 110, height: 1)
+                    .foregroundStyle(Colors.Neutrals.n200)
+                
+            }
+            
+            ForEach(accountsImages, id: \.self) { account in
+                
+                Button {
+                    
+                } label: {
+                    Image(account)
+                }
+                .frame(width: 343, height: 48)
+                .background(Colors.Neutrals.n50)
+                .clipShape(.rect(cornerRadius: 8))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Colors.Neutrals.n200, lineWidth: 1)
+                )
+                
+            }
+        }
     }
     
     var forgetPassword: some View {
@@ -66,7 +113,7 @@ struct RegisterView: View {
             } label: {
                 Text("Forgot Password?")
             }
-           
+            
         }
     }
     
@@ -108,12 +155,20 @@ struct RegisterView: View {
             if isSignUp {
                 CustomTextField(textValue: $fullName, placeHolder: "Enter full name", keyboardType: .default, title: "Full Name")
             }
-                
-                CustomTextField(textValue: $email, placeHolder: "Enter email", keyboardType: .emailAddress, title: "Email")
-                
-                CustomTextField(textValue: $password, isPasswordField: true, placeHolder: "Enter password", keyboardType: .default, title: "Password")
+            
+            CustomTextField(textValue: $email, placeHolder: "Enter email", keyboardType: .emailAddress, title: "Email")
+            
+            CustomTextField(textValue: $password, isPasswordField: true, placeHolder: "Enter password", keyboardType: .default, title: "Password")
             
         }
+    }
+    
+    func reset() {
+        fullName = ""
+        email = ""
+        password = ""
+        isChecked = false
+        
     }
 }
 

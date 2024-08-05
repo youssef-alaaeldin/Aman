@@ -9,12 +9,15 @@ import SwiftUI
 
 struct OnboardingView: View {
     
-    
     let elements = ["#1 Best Real Estate App in The World",
                     "There Are Various Types of Houses are Here",
                     "Find Your Dream House Easily And Quickly"]
     
     @State private var currentText = 0
+    @State private var goToLogin = 1
+    
+    @EnvironmentObject var coordinator : Coordinator
+    
     var body: some View {
         
         VStack {
@@ -58,11 +61,22 @@ struct OnboardingView: View {
                 }
             }
             
-            
-            CustomButton(label: currentText == elements.count - 1 ? "Get Started" : "Next") {
-                withAnimation {
-                    currentText = (currentText + 1) % elements.count
+            if currentText == elements.count - 1 {
+                
+                CustomButton(label: "Get Started") {
+//                    coordinator.pu(fullScreenCover: .register)
+                    coordinator.push(.register)
                 }
+            }
+            else {
+                CustomButton(label: "Next") {
+                    withAnimation {
+                        if currentText < elements.count - 1 {
+                            currentText += 1
+                        }
+                    }
+                }
+                
             }
         }
         .padding()

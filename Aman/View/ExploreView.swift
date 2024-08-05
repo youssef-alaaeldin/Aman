@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct ExploreView: View {
+    @State private var selectedTab: Tab = .Explore
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            CustomTabBar(selectedTab: $selectedTab)
+        }
     }
 }
 

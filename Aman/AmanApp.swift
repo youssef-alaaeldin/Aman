@@ -11,7 +11,7 @@ import SwiftUI
 struct AmanApp: App {
     var body: some Scene {
         WindowGroup {
-            RegisterView()
+            CoordinatorView()
         }
     }
 }
