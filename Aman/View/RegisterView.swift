@@ -21,7 +21,6 @@ struct RegisterView: View {
     
     var body: some View {
         
-        NavigationStack {
             ScrollView {
                 VStack (spacing: 16) {
                     
@@ -36,7 +35,7 @@ struct RegisterView: View {
                     CustomButton(label: isSignUp ? "Register" : "Login", action: {
                         //TODO: SIGN UP - LOGIN
                         
-                        coordinator.push(.explore)
+                        coordinator.push(.main)
                     })
                     .opacity(isChecked ? 1.0 : 0.5)
                     .disabled(!isChecked)
@@ -62,12 +61,15 @@ struct RegisterView: View {
                     Spacer()
                 }
                 .navigationTitle(isSignUp ? "Sign Up" : "Let's Login")
+                .navigationBarTitleDisplayMode(.large)
+                .navigationBarBackButtonHidden()
                 .padding()
             }
+            
         }
         
         
-    }
+    
     
     var loginPart: some View {
         Group {

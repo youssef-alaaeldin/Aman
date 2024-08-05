@@ -64,7 +64,7 @@ struct OnboardingView: View {
             if currentText == elements.count - 1 {
                 
                 CustomButton(label: "Get Started") {
-//                    coordinator.pu(fullScreenCover: .register)
+//                    coordinator.present(fullScreenCover: .register)
                     coordinator.push(.register)
                 }
             }

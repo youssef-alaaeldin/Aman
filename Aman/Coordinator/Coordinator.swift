@@ -10,7 +10,7 @@ import SwiftUI
 
 enum Page: String, Identifiable {
     
-    case onboarding, register, explore
+    case onboarding, register, main
     
     var id: String {
         self.rawValue
@@ -19,7 +19,7 @@ enum Page: String, Identifiable {
 
 enum Sheet: String, Identifiable {
     
-    case onboarding, register
+    case register
     
     var id: String {
         self.rawValue
@@ -28,7 +28,7 @@ enum Sheet: String, Identifiable {
 
 enum FullScreenCover: String, Identifiable {
 
-    case register , explore
+    case register
     
     var id: String {
         self.rawValue
@@ -80,8 +80,8 @@ class Coordinator: ObservableObject {
         switch page {
         case .onboarding:
             OnboardingView()
-        case .explore:
-            ExploreView()
+        case .main:
+            MainView()
         case .register:
             RegisterView()
         }
@@ -90,8 +90,6 @@ class Coordinator: ObservableObject {
     @ViewBuilder
     func build(sheet: Sheet) -> some View {
         switch sheet {
-        case .onboarding:
-            OnboardingView()
         case .register:
             RegisterView()
         }
@@ -100,8 +98,7 @@ class Coordinator: ObservableObject {
     @ViewBuilder
     func build(fullScreenCover: FullScreenCover) -> some View {
         switch fullScreenCover {
-        case .explore:
-            ExploreView()
+       
         case .register:
             RegisterView()
         }
