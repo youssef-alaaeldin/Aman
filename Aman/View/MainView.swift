@@ -10,10 +10,10 @@ import SwiftUI
 struct MainView: View {
     @State private var selectedTab: Tab = .Explore
     
-    
-    init() {
-        UITabBar.appearance().isHidden = true
-    }
+//    
+//    init() {
+////        UITabBar.appearance().isHidden = true
+//    }
     
     var body: some View {
         

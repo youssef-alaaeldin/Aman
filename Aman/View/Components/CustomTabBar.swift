@@ -52,6 +52,7 @@ struct CustomTabBar: View {
         }
         .frame(height: 56)
         .padding(.bottom)
+        .background()
     }
 }
 

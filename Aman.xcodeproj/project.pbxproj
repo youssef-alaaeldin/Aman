@@ -14,6 +14,7 @@
 		0B17E88A2C60EC7C00FC158D /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B17E8892C60EC7C00FC158D /* ExploreView.swift */; };
 		0B17E88C2C60EC8600FC158D /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B17E88B2C60EC8600FC158D /* AccountView.swift */; };
 		0B17E88E2C60EC8F00FC158D /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B17E88D2C60EC8F00FC158D /* FavoriteView.swift */; };
+		0B17E8902C61E50D00FC158D /* PropertyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B17E88F2C61E50D00FC158D /* PropertyCardView.swift */; };
 		0B728E1F2C5DF8750012625A /* AmanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E1E2C5DF8750012625A /* AmanApp.swift */; };
 		0B728E212C5DF8750012625A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B728E202C5DF8750012625A /* OnboardingView.swift */; };
 		0B728E232C5DF8770012625A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B728E222C5DF8770012625A /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		0B17E8892C60EC7C00FC158D /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		0B17E88B2C60EC8600FC158D /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		0B17E88D2C60EC8F00FC158D /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		0B17E88F2C61E50D00FC158D /* PropertyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyCardView.swift; sourceTree = "<group>"; };
 		0B728E1B2C5DF8750012625A /* Aman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B728E1E2C5DF8750012625A /* AmanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmanApp.swift; sourceTree = "<group>"; };
 		0B728E202C5DF8750012625A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -202,8 +204,8 @@
 				0B728E852C5E4FDD0012625A /* RegisterView.swift */,
 				0B17E8872C60DEF100FC158D /* MainView.swift */,
 				0B17E8892C60EC7C00FC158D /* ExploreView.swift */,
-				0B17E88B2C60EC8600FC158D /* AccountView.swift */,
 				0B17E88D2C60EC8F00FC158D /* FavoriteView.swift */,
+				0B17E88B2C60EC8600FC158D /* AccountView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -247,6 +249,7 @@
 				0B728E8C2C5E66D70012625A /* CustomCheckBox.swift */,
 				0B728E8E2C5F8F380012625A /* CustomButton.swift */,
 				0B17E8852C60CE2200FC158D /* CustomTabBar.swift */,
+				0B17E88F2C61E50D00FC158D /* PropertyCardView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				0B17E88A2C60EC7C00FC158D /* ExploreView.swift in Sources */,
 				0B728E4E2C5DF90D0012625A /* Colors.swift in Sources */,
 				0B728E652C5E088D0012625A /* FontStyles.swift in Sources */,
+				0B17E8902C61E50D00FC158D /* PropertyCardView.swift in Sources */,
 				0B728E1F2C5DF8750012625A /* AmanApp.swift in Sources */,
 				0B17E8882C60DEF100FC158D /* MainView.swift in Sources */,
 				0B17E88E2C60EC8F00FC158D /* FavoriteView.swift in Sources */,
