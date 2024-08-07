@@ -10,6 +10,7 @@ import SwiftUI
 struct ExploreView: View {
     
     @State private var searchValue: String = ""
+    @State private var selectedChoice : Choices = .All
     let columns = [
             GridItem(.flexible()),
             GridItem(.flexible())
@@ -19,6 +20,8 @@ struct ExploreView: View {
             VStack (spacing: 24) {
                 searchBar
                 banners
+                
+                FilterButtonsView(selectedChoice: $selectedChoice)
                 
                 LazyVGrid(columns: columns, spacing: 20) {
                     PropertyCardView()

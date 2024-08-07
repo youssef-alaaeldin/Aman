@@ -10,29 +10,31 @@ import SwiftUI
 struct MainView: View {
     @State private var selectedTab: Tab = .Explore
     
-//    
-//    init() {
-////        UITabBar.appearance().isHidden = true
-//    }
+    //
+    //    init() {
+    ////        UITabBar.appearance().isHidden = true
+    //    }
     
     var body: some View {
         
         ZStack {
             VStack {
                 TabView(selection: $selectedTab) {
-                    switch selectedTab {
-                    case .Explore:
+                    Group {
                         NavigationStack {
                             ExploreView()
                         }
-                    case .Favorite:
+                        .tag(Tab.Explore)
+                        
                         NavigationStack {
                             FavoriteView()
                         }
-                    case .Account:
+                        .tag(Tab.Favorite)
+                        
                         NavigationStack {
                             AccountView()
                         }
+                        .tag(Tab.Account)
                     }
                 }
             }

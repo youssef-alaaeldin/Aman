@@ -12,50 +12,7 @@ struct PropertyCardView: View {
     @State var isFavorite = false
     var body: some View {
         
-        //            ZStack (alignment: .top)  {
-        //                RoundedRectangle(cornerRadius: 15)
-        //
-        //                    .foregroundStyle(Colors.Neutrals.n50)
-        //                    .overlay(
-        //                        RoundedRectangle(cornerRadius: 15)
-        //                            .stroke(Colors.Neutrals.n200, lineWidth: 1)
-        //                    )
-        //
-        //                VStack(alignment: .leading) {
-        //                    Image("4")
-        //                        .resizable()
-        //                        .aspectRatio(contentMode: .fill)
-        //                        .frame(width: 140, height: 146)
-        //                        .clipShape(.rect(cornerRadius: 10))
-        //                        .padding(.all , 11)
-        //
-        //                    Button {
-        //                        withAnimation {
-        //                            isFavorite.toggle()
-        //                        }
-        //                    } label: {
-        //                        Circle()
-        //                            .frame(width: 32, height: 32)
-        //                            .foregroundStyle(.white)
-        //                            .shadow(radius: 10)
-        //                            .overlay (alignment: .center) {
-        //                                Image(isFavorite ? "Favorite-fill" : "Favorite")
-        //                                    .resizable()
-        //                                    .frame(width: 20, height: 20)
-        //                            }
-        //                    }
-        //                    .position(x: 120, y: -20)
-        //
-        //                    HStack {
-        //                        Image(systemName: "house")
-        //                        Text("HOUSE")
-        //                    }
-        //                }
-        //
-        //            }
-        //            .frame(width: 162, height: 268)
-        //
-        //
+       
         ZStack ( alignment: .top) {
             
             RoundedRectangle(cornerRadius: 15)
@@ -68,7 +25,7 @@ struct PropertyCardView: View {
             
             VStack ( alignment: .leading, spacing: 5) {
                 ZStack {
-                    Image("4")
+                    Image("3")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 140, height: 146)
@@ -123,8 +80,6 @@ struct PropertyCardView: View {
                     .padding(.top, 5)
                 }
                 .padding(.horizontal, 10)
-//                }
-//                .padding(.horizontal, 5)
             }
             
         }
