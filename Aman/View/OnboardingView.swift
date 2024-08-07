@@ -24,14 +24,8 @@ private let onboardingSteps = [
 
 struct OnboardingView: View {
     
-    let elements = ["#1 Best Real Estate App in The World",
-                    "There Are Various Types of Houses are Here",
-                    "Find Your Dream House Easily And Quickly"]
     
     @State private var currentStep = 0
-    
-    @State private var currentText = 0
-    @State private var goToLogin = 1
     
     @EnvironmentObject var coordinator : Coordinator
     
@@ -41,34 +35,10 @@ struct OnboardingView: View {
     
     var body: some View {
         
-        
-        
-        
         TabView(selection : $currentStep) {
             ForEach(0..<onboardingSteps.count, id: \.self) { item in
-                VStack (alignment: .center, spacing: 16){
-                    
-                    Image(String(onboardingSteps[item].image))
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 266, height: 350)
-                        .clipShape(.rect(topLeadingRadius: 400, topTrailingRadius: 400))
-                    
-                    Text(onboardingSteps[item].title)
-                        .font(FontStyles.Heading.h3)
-                        .foregroundStyle(Colors.Neutrals.n900)
-                        .multilineTextAlignment(.center)
-                    
-                    
-                    Text(onboardingSteps[item].description)
-                        .font(FontStyles.Body.mediumRegular)
-                        .foregroundStyle(Colors.Neutrals.n600)
-                        .multilineTextAlignment(.center)
-//                    bodyText
-                    
-                    
-                }
-                .tag(item)
+                bodyText(item: onboardingSteps[item])
+                    .tag(item)
             }
            
         }
@@ -78,21 +48,35 @@ struct OnboardingView: View {
         slideView
     }
     
-    var bodyText: some View {
-        VStack(alignment: .center, spacing: 16) {
-            Text(elements[currentText])
-                .font(FontStyles.Heading.h3)
-                .foregroundStyle(Colors.Neutrals.n900)
-                .multilineTextAlignment(.center)
-            
-            
-            Text("Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.")
-                .font(FontStyles.Body.mediumRegular)
-                .foregroundStyle(Colors.Neutrals.n600)
-                .multilineTextAlignment(.center)
+    struct bodyText: View {
+        
+        var item: OnboardingStep
+        var body: some View {
+            VStack(alignment: .center, spacing: 16) {
+                
+                Image(item.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 266, height: 350)
+                    .clipShape(.rect(topLeadingRadius: 400, topTrailingRadius: 400))
+                
+                
+                Text(item.title)
+                    .font(FontStyles.Heading.h3)
+                    .foregroundStyle(Colors.Neutrals.n900)
+                    .multilineTextAlignment(.center)
+                
+                
+                Text(item.description)
+                    .font(FontStyles.Body.mediumRegular)
+                    .foregroundStyle(Colors.Neutrals.n600)
+                    .multilineTextAlignment(.center)
+            }
+            .padding()
         }
-        .padding()
     }
+    
+    
     var slideView : some View {
         
         VStack(spacing: 40) {
