@@ -11,6 +11,7 @@ struct Property: Identifiable {
     
     let id: UUID
     let name: String
+    let description: String
     let type: PropertyType
     let price: Double
     let location: String

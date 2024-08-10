@@ -94,7 +94,7 @@ struct PropertyCardView: View {
 }
 
 #Preview {
-    PropertyCardView(property: Property(id: UUID(), name: "Youssef alaa", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, imageURL: "2"))
+    PropertyCardView(property: Property(id: UUID(), name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, imageURL: "2"))
 }
 
 extension Double {

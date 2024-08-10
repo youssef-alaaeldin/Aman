@@ -87,7 +87,7 @@ struct OnboardingView: View {
                         .clipShape(.rect(cornerRadius: 20))
                         .foregroundStyle(currentStep == index ? Colors.Primary.p500 : .smallCircle)
                         .frame(width: currentStep == index ? 27 : 8 , height: 8)
-                        .animation(.default, value: currentStep)
+                        .animation(.easeInOut, value: currentStep)
                     
                 }
             }
@@ -105,23 +105,6 @@ struct OnboardingView: View {
                 }
             }
             
-//            if currentText == elements.count - 1 {
-//                
-//                CustomButton(label: "Get Started") {
-////                    coordinator.present(fullScreenCover: .register)
-//                    coordinator.push(.register)
-//                }
-//            }
-//            else {
-//                CustomButton(label: "Next") {
-//                    withAnimation {
-//                        if currentText < elements.count - 1 {
-//                            currentText += 1
-//                        }
-//                    }
-//                }
-//                
-//            }
         }
         .padding()
     }
