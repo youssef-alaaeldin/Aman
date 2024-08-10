@@ -29,9 +29,9 @@ struct OnboardingView: View {
     
     @EnvironmentObject var coordinator : Coordinator
     
-    init() {
-        UIScrollView.appearance().bounces = false
-    }
+//    init() {
+//        UIScrollView.appearance().bounces = false
+//    }
     
     var body: some View {
         
@@ -73,6 +73,7 @@ struct OnboardingView: View {
                     .multilineTextAlignment(.center)
             }
             .padding()
+            
         }
     }
     

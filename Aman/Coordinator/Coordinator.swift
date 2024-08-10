@@ -10,7 +10,7 @@ import SwiftUI
 
 enum Page: String, Identifiable {
     
-    case onboarding, register, main
+    case onboarding, register, main , propertyDetails
     
     var id: String {
         self.rawValue
@@ -40,7 +40,7 @@ class Coordinator: ObservableObject {
     @Published var path = NavigationPath()
     @Published var sheet: Sheet?
     @Published var fullScreenCover: FullScreenCover?
-    
+    var selectedProperty: Property?
     
     func push(_ page: Page) {
         path.append(page)
@@ -74,6 +74,10 @@ class Coordinator: ObservableObject {
         self.fullScreenCover = nil
     }
     
+    func showPropertyDetails(for property: Property) {
+        selectedProperty = property
+        push(.propertyDetails)
+    }
     
     @ViewBuilder
     func build(page: Page) -> some View {
@@ -84,6 +88,11 @@ class Coordinator: ObservableObject {
             MainView()
         case .register:
             RegisterView()
+        case .propertyDetails:
+            if let property = selectedProperty {
+                PropertyDelatisView(property: property)
+            }
+        
         }
     }
     

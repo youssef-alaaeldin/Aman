@@ -10,11 +10,6 @@ import SwiftUI
 struct MainView: View {
     @State private var selectedTab: Tab = .Explore
     
-    //
-    //    init() {
-    ////        UITabBar.appearance().isHidden = true
-    //    }
-    
     var body: some View {
         
         ZStack {
@@ -23,6 +18,7 @@ struct MainView: View {
                     Group {
                         NavigationStack {
                             ExploreView()
+//                                .environmentObject(properties)
                         }
                         .tag(Tab.Explore)
                         

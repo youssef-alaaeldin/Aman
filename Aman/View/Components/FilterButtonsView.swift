@@ -7,19 +7,14 @@
 
 import SwiftUI
 
-enum Choices: String, CaseIterable {
-    case All
-    case House
-    case Villa
-    case Apartment
-}
+
 struct FilterButtonsView: View {
     
-    @Binding var selectedChoice: Choices
+    @Binding var selectedChoice: Property.PropertyType
     var body: some View {
         VStack {
             HStack {
-                ForEach(Choices.allCases, id: \.rawValue) { choice in
+                ForEach(Property.PropertyType.allCases, id: \.rawValue) { choice in
                     Button {
                         withAnimation {
                             selectedChoice = choice

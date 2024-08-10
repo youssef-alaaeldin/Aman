@@ -9,8 +9,12 @@ import SwiftUI
 
 struct ExploreView: View {
     
+    @StateObject var properties = PropertyViewModel()
+    
     @State private var searchValue: String = ""
-    @State private var selectedChoice : Choices = .All
+    @State private var selectedChoice : Property.PropertyType = .All
+    
+    @EnvironmentObject var coordinator: Coordinator
     let columns = [
             GridItem(.flexible()),
             GridItem(.flexible())
@@ -24,12 +28,16 @@ struct ExploreView: View {
                 FilterButtonsView(selectedChoice: $selectedChoice)
                 
                 LazyVGrid(columns: columns, spacing: 20) {
-                    PropertyCardView()
-                    PropertyCardView()
-                    PropertyCardView()
-                    PropertyCardView()
-                    PropertyCardView()
+                    ForEach(properties.filterProperties(by: selectedChoice), id: \.id) { prop in
+                        PropertyCardView(property: prop)
+                            .onTapGesture {
+                                coordinator.showPropertyDetails(for: prop)
+                            }
+                            
+                            
+                    }
                 }
+                
                 Spacer()
             }
             .navigationTitle("Explore")

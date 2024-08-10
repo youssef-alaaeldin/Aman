@@ -7,9 +7,14 @@
 
 import SwiftUI
 
-struct PropertyCardView: View {
+enum PropertyIcon {
     
+}
+
+struct PropertyCardView: View {
+    let property : Property
     @State var isFavorite = false
+    
     var body: some View {
         
        
@@ -25,7 +30,7 @@ struct PropertyCardView: View {
             
             VStack ( alignment: .leading, spacing: 5) {
                 ZStack {
-                    Image("3")
+                    Image(property.imageURL)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 140, height: 146)
@@ -56,16 +61,16 @@ struct PropertyCardView: View {
                 Group {
                     HStack {
                         Image(systemName: "house")
-                        Text("HOUSE")
+                        Text(property.type.rawValue)
                     }
                     .foregroundStyle(Colors.Neutrals.n600)
                     
                     .font(FontStyles.Body.smallRegular)
-                    Text("$307,857")
+                    Text(property.price.formattedAsCurrency())
                         .font(FontStyles.Body.smallBold)
                         .foregroundStyle(Colors.Primary.p500)
                     
-                    Text("Rumah pakuwon city megahas")
+                    Text(property.name)
                         .lineLimit(1)
                         .truncationMode(.tail)
                         .font(FontStyles.Body.smallBold)
@@ -73,7 +78,7 @@ struct PropertyCardView: View {
                     
                     HStack {
                         Image(systemName: "location")
-                        Text("Location")
+                        Text(property.location)
                     }
                     .font(FontStyles.Body.xSmallRegular)
                     .foregroundStyle(Colors.Neutrals.n600)
@@ -89,5 +94,16 @@ struct PropertyCardView: View {
 }
 
 #Preview {
-    PropertyCardView()
+    PropertyCardView(property: Property(id: UUID(), name: "Youssef alaa", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, imageURL: "2"))
+}
+
+extension Double {
+    func formattedAsCurrency() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 0
+        formatter.minimumFractionDigits = 0
+        formatter.locale = Locale(identifier: "en_US") // You can change this to your desired locale
+        return formatter.string(from: NSNumber(value: self)) ?? "$0"
+    }
 }
