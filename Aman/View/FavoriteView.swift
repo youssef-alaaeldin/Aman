@@ -8,10 +8,22 @@
 import SwiftUI
 
 struct FavoriteView: View {
+    
+    @StateObject private var properties = PropertyViewModel()
+    
     var body: some View {
-        VStack {
-            Text("Favorite")
+        ScrollView {
+            VStack(spacing: 16) {
+                ForEach(properties.properties, id: \.id) {
+                    prop in
+                    
+                    FavoriteCardView(property: prop)
+                }
+            }
+            
+            
         }
+        .padding()
         .navigationTitle("Favorites")
     }
 }
