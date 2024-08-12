@@ -44,6 +44,7 @@ class Coordinator: ObservableObject {
     
     func push(_ page: Page) {
         path.append(page)
+        print("push basic \(path.count)")
     }
     
     // SHEET PRESENTING
@@ -60,10 +61,12 @@ class Coordinator: ObservableObject {
     
     func pop() {
         path.removeLast()
+        print("pop to main \(path.count)")
     }
     
     func popToRoot() {
         path.removeLast(path.count)
+        print("pop to root \(path.count)")
     }
     
     func dismissSheet() {
@@ -77,6 +80,7 @@ class Coordinator: ObservableObject {
     func showPropertyDetails(for property: Property) {
         selectedProperty = property
         push(.propertyDetails)
+        print("push prop \(path.count)")
     }
     
     @ViewBuilder

@@ -27,7 +27,7 @@ struct OnboardingView: View {
     
     @State private var currentStep = 0
     
-    @EnvironmentObject var coordinator : Coordinator
+    @EnvironmentObject private var coordinator : Coordinator
     
 //    init() {
 //        UIScrollView.appearance().bounces = false

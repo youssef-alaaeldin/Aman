@@ -16,21 +16,13 @@ struct MainView: View {
             VStack {
                 TabView(selection: $selectedTab) {
                     Group {
-                        NavigationStack {
-                            ExploreView()
-//                                .environmentObject(properties)
-                        }
-                        .tag(Tab.Explore)
+                        ExploreView()
+                            .tag(Tab.Explore)
                         
-                        NavigationStack {
-                            FavoriteView()
-                        }
-                        .tag(Tab.Favorite)
-                        
-                        NavigationStack {
-                            AccountView()
-                        }
-                        .tag(Tab.Account)
+                        FavoriteView()
+                            .tag(Tab.Favorite)
+                        AccountView()
+                            .tag(Tab.Account)
                     }
                 }
             }

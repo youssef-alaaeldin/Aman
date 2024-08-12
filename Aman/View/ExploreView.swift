@@ -14,7 +14,7 @@ struct ExploreView: View {
     @State private var searchValue: String = ""
     @State private var selectedChoice : Property.PropertyType = .All
     
-    @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject private var coordinator: Coordinator
     let columns = [
             GridItem(.flexible()),
             GridItem(.flexible())
