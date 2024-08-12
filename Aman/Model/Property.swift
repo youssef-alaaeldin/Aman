@@ -18,7 +18,7 @@ struct Property: Identifiable {
     let numberOfBedrooms: Int
     let numberOfBathrooms: Int
     let size: Double // in square meters
-    let imageURL: String
+    let images: [String]
     
     enum PropertyType: String, CaseIterable {
         case All

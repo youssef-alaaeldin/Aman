@@ -54,10 +54,7 @@ struct PropertyDelatisView: View {
     
     var imageSection: some View {
         VStack(alignment: .leading) {
-            Image(property.imageURL)
-                .resizable()
-                .frame(height: 375)
-            
+            ImageSlider(images: property.images)
             VStack(alignment: .leading, spacing: 5) {
                 
                 HStack {
@@ -151,8 +148,10 @@ struct PropertyDelatisView: View {
         .padding()
     }
     
+    
     var detailsSection: some View {
         VStack(alignment: .leading,spacing: 12) {
+            
             Text("Details")
                 .font(FontStyles.Body.largeBold)
                 .foregroundStyle(Colors.Neutrals.n900)
@@ -181,8 +180,8 @@ struct PropertyDelatisView: View {
             
             VStack {
                 Text(property.description)
-                    
-                    
+                    .font(FontStyles.Body.largeRegular)
+                    .foregroundStyle(Colors.Neutrals.n900)
             }
             .padding()
             .background(Colors.Neutrals.n100)
@@ -198,5 +197,5 @@ struct PropertyDelatisView: View {
 }
 
 #Preview {
-    PropertyDelatisView(property: Property(id: UUID(), name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, imageURL: "2"))
+    PropertyDelatisView(property: Property(id: UUID(), name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, images: ["1", "2", "3", "4"]))
 }
