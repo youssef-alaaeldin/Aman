@@ -16,7 +16,10 @@ struct RegisterView: View {
     @State var isChecked = false
     
     @EnvironmentObject private var coordinator: Coordinator
+    @EnvironmentObject private var authViewModel : AuthViewModel
     
+    @State private var signingUp = false
+    @State private var loggingIn = false
     private let accountsImages = ["google", "facebook", "apple"]
     
     var body: some View {
@@ -33,12 +36,37 @@ struct RegisterView: View {
                     
                     
                     CustomButton(label: isSignUp ? "Register" : "Login", action: {
-                        //TODO: SIGN UP - LOGIN
                         
-                        coordinator.push(.main)
+                        if isSignUp {
+                            // SIGN UP
+                            Task {
+                                signingUp = true
+                                do  {
+                                    try await authViewModel.createUser(withEmail: authViewModel.email, password: authViewModel.password, fullName: fullName)
+                                    self.coordinator.push(.main)
+                                } catch {
+                                    print("Error creating user \(error.localizedDescription)")
+                                }
+                            }
+                            
+                        } else {
+                            //LOGIN
+                            
+                            Task {
+                                do {
+                                    try await authViewModel.signIn(withEmail: authViewModel.email, password: authViewModel.password)
+                                    
+                                    self.coordinator.push(.main)
+                                } catch {
+                                    print("Error loging in \(error.localizedDescription)")
+                                }
+                            }
+                        }
+                        
+                        
                     })
-                    .opacity(isChecked ? 1.0 : 0.5)
-                    .disabled(!isChecked)
+                    .opacity(isChecked && authViewModel.isFormValid ? 1.0 : 0.5)
+                    .disabled(!isChecked && authViewModel.isFormValid)
                     
                     if isSignUp {
                         signUpPart
@@ -152,15 +180,33 @@ struct RegisterView: View {
     }
     
     var textFields: some View {
-        Group {
+        VStack(alignment: .leading,spacing: 16) {
             
             if isSignUp {
                 CustomTextField(textValue: $fullName, placeHolder: "Enter full name", keyboardType: .default, title: "Full Name")
             }
             
-            CustomTextField(textValue: $email, placeHolder: "Enter email", keyboardType: .emailAddress, title: "Email")
             
-            CustomTextField(textValue: $password, isPasswordField: true, placeHolder: "Enter password", keyboardType: .default, title: "Password")
+            CustomTextField(textValue: $authViewModel.email, placeHolder: "Enter email", keyboardType: .emailAddress, title: "Email")
+            
+            if case .invalid(let message) = authViewModel.emailValidation {
+                HStack {
+                    Image(systemName: "exclamationmark.circle")
+                    Text(message)
+                }
+                .foregroundStyle(Colors.Other.validationColor)
+            }
+            
+            
+            CustomTextField(textValue: $authViewModel.password, isPasswordField: true, placeHolder: "Enter password", keyboardType: .default, title: "Password")
+            
+            if case .invalid(let message) = authViewModel.passwordValidation {
+                HStack {
+                    Image(systemName: "exclamationmark.circle")
+                    Text(message)
+                }
+                .foregroundStyle(Colors.Other.validationColor)
+            }
             
         }
     }

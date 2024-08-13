@@ -46,4 +46,7 @@ struct Colors {
         static let n800 = Color("Neutrals800")
         static let n900 = Color("Neutrals900")
     }
+    struct Other {
+        static let validationColor = Color("Validation")
+    }
 }

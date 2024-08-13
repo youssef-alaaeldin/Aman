@@ -19,12 +19,14 @@ struct FavoriteView: View {
                     
                     FavoriteCardView(property: prop)
                 }
+                Spacer()
             }
+            .navigationTitle("Favorites")
             
             
         }
         .padding()
-        .navigationTitle("Favorites")
+//        .navigationTitle("Favorites")
     }
 }
 
