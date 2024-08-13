@@ -20,84 +20,64 @@ struct RegisterView: View {
     
     @State private var signingUp = false
     @State private var loggingIn = false
+    
+    @State private var showWarnings = false
     private let accountsImages = ["google", "facebook", "apple"]
     
     var body: some View {
         
-            ScrollView {
-                VStack (spacing: 16) {
-                    
-                    textFields
-                    if isSignUp {
-                        policyAgreementForSignup
-                    } else {
-                        forgetPassword
-                    }
-                    
-                    
-                    CustomButton(label: isSignUp ? "Register" : "Login", action: {
-                        
-                        if isSignUp {
-                            // SIGN UP
-                            Task {
-                                signingUp = true
-                                do  {
-                                    try await authViewModel.createUser(withEmail: authViewModel.email, password: authViewModel.password, fullName: fullName)
-                                    self.coordinator.push(.main)
-                                } catch {
-                                    print("Error creating user \(error.localizedDescription)")
-                                }
-                            }
-                            
-                        } else {
-                            //LOGIN
-                            
-                            Task {
-                                do {
-                                    try await authViewModel.signIn(withEmail: authViewModel.email, password: authViewModel.password)
-                                    
-                                    self.coordinator.push(.main)
-                                } catch {
-                                    print("Error loging in \(error.localizedDescription)")
-                                }
-                            }
-                        }
-                        
-                        
-                    })
-                    .opacity(isChecked && authViewModel.isFormValid ? 1.0 : 0.5)
-                    .disabled(!isChecked && authViewModel.isFormValid)
-                    
-                    if isSignUp {
-                        signUpPart
-                    } else {
-                        loginPart
-                    }
-                    
-                    HStack {
-                        Text(isSignUp ? "Already have an account?" : "Don't have an account?")
-                        Button {
-                            withAnimation {
-                                isSignUp.toggle()
-                                reset()
-                            }
-                        } label: {
-                            Text(isSignUp ? "Login" : "Sign Up")
-                        }
-                    }
-                    
-                    Spacer()
+        ScrollView {
+            VStack (spacing: 16) {
+                
+                textFields
+                if isSignUp {
+                    policyAgreementForSignup
+                } else {
+                    forgetPassword
                 }
-                .navigationTitle(isSignUp ? "Sign Up" : "Let's Login")
-                .navigationBarTitleDisplayMode(.large)
-                .navigationBarBackButtonHidden()
-                .padding()
+                
+                if signingUp || loggingIn {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .padding()
+                }
+                else {
+                    registerButton
+                }
+                
+                if isSignUp {
+                    signUpPart
+                } else {
+                    loginPart
+                }
+                
+                HStack {
+                    Text(isSignUp ? "Already have an account?" : "Don't have an account?")
+                    Button {
+                        withAnimation {
+                            isSignUp.toggle()
+                            reset()
+                        }
+                        if !isSignUp {
+                            isChecked = true
+                        }
+                    } label: {
+                        Text(isSignUp ? "Login" : "Sign Up")
+                    }
+                }
+                
+                Spacer()
             }
-            
+            .navigationTitle(isSignUp ? "Sign Up" : "Let's Login")
+            .navigationBarTitleDisplayMode(.large)
+            .navigationBarBackButtonHidden()
+            .padding()
         }
         
-        
+    }
     
+    
+    // MARK: - SubViews
     
     var loginPart: some View {
         Group {
@@ -187,27 +167,78 @@ struct RegisterView: View {
             }
             
             
-            CustomTextField(textValue: $authViewModel.email, placeHolder: "Enter email", keyboardType: .emailAddress, title: "Email")
+            CustomTextField(textValue: $authViewModel.email,showWarnings: $showWarnings ,placeHolder: "Enter email", keyboardType: .emailAddress, title: "Email")
             
-            if case .invalid(let message) = authViewModel.emailValidation {
-                HStack {
-                    Image(systemName: "exclamationmark.circle")
-                    Text(message)
+            if showWarnings {
+                if case .invalid(let message) = authViewModel.emailValidation {
+                    HStack {
+                        Image(systemName: "exclamationmark.circle")
+                        Text(message)
+                    }
+                    .foregroundStyle(Colors.Other.validationColor)
                 }
-                .foregroundStyle(Colors.Other.validationColor)
             }
             
             
-            CustomTextField(textValue: $authViewModel.password, isPasswordField: true, placeHolder: "Enter password", keyboardType: .default, title: "Password")
+            CustomTextField(textValue: $authViewModel.password, isPasswordField: true , showWarnings: $showWarnings , placeHolder: "Enter password", keyboardType: .default, title: "Password")
             
-            if case .invalid(let message) = authViewModel.passwordValidation {
-                HStack {
-                    Image(systemName: "exclamationmark.circle")
-                    Text(message)
+            if showWarnings {
+                if case .invalid(let message) = authViewModel.passwordValidation {
+                    HStack {
+                        Image(systemName: "exclamationmark.circle")
+                        Text(message)
+                    }
+                    .foregroundStyle(Colors.Other.validationColor)
                 }
-                .foregroundStyle(Colors.Other.validationColor)
             }
             
+        }
+    }
+    
+    var registerButton : some View {
+        
+        CustomButton(label: isSignUp ? "Register" : "Login", action: {
+            if isSignUp {
+                signUpUser()
+            } else {
+                signInUser()
+                
+            }
+        })
+        .opacity(isChecked && authViewModel.isFormValid ? 1.0 : 0.5)
+        .disabled(!isChecked && !authViewModel.isFormValid)
+    }
+    
+    //MARK: - Actions
+    
+    private func signUpUser() {
+        Task {
+            signingUp = true
+            do  {
+                try await authViewModel.createUser(withEmail: authViewModel.email, password: authViewModel.password, fullName: fullName)
+                self.coordinator.push(.main)
+            } catch {
+                showWarnings = true
+                print("Error creating user \(error.localizedDescription)")
+            }
+            signingUp = false
+        }
+        
+    }
+    
+    private func signInUser() {
+        
+        Task {
+            loggingIn = true
+            do {
+                try await authViewModel.signIn(withEmail: authViewModel.email, password: authViewModel.password)
+                
+                self.coordinator.push(.main)
+            } catch {
+                showWarnings = true
+                print("Error loging in \(error.localizedDescription)")
+            }
+            loggingIn = false
         }
     }
     
@@ -216,6 +247,7 @@ struct RegisterView: View {
         email = ""
         password = ""
         isChecked = false
+        showWarnings = false
         
     }
 }

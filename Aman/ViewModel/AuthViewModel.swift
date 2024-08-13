@@ -42,13 +42,13 @@ class AuthViewModel: ObservableObject {
     
     private func setupValidation() {
         $email
-            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .map { self.validateEmail($0) }
             .assign(to: &$emailValidation)
 //            .store(in: &cancellables)
         
         $password
-            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .map { self.validatePassword($0) }
             .assign(to: &$passwordValidation)
 //            .store(in: &cancellables)
