@@ -28,10 +28,10 @@ struct OnboardingView: View {
     @State private var currentStep = 0
     
     @EnvironmentObject private var coordinator : Coordinator
-    
-//    init() {
-//        UIScrollView.appearance().bounces = false
-//    }
+    @EnvironmentObject private var auth : AuthViewModel
+    //    init() {
+    //        UIScrollView.appearance().bounces = false
+    //    }
     
     var body: some View {
         
@@ -40,7 +40,7 @@ struct OnboardingView: View {
                 bodyText(item: onboardingSteps[item])
                     .tag(item)
             }
-           
+            
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         .padding()
@@ -101,7 +101,12 @@ struct OnboardingView: View {
                     }
                 }
                 else {
-                    coordinator.push(.register)
+//                    if auth.userSession != nil {
+//                        coordinator.push(.main)
+//                    }
+//                    else {
+                        coordinator.push(.register)
+//                    }
                 }
             }
             

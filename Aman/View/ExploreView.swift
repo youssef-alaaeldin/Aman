@@ -9,16 +9,18 @@ import SwiftUI
 
 struct ExploreView: View {
     
-    @StateObject var properties = PropertyViewModel()
+    @EnvironmentObject var properties : PropertyViewModel
     
     @State private var searchValue: String = ""
     @State private var selectedChoice : Property.PropertyType = .All
     
     @EnvironmentObject private var coordinator: Coordinator
     let columns = [
-            GridItem(.flexible()),
-            GridItem(.flexible())
-        ]
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
+    
     var body: some View {
         ScrollView(.vertical) {
             VStack (spacing: 24) {
@@ -33,8 +35,6 @@ struct ExploreView: View {
                             .onTapGesture {
                                 coordinator.showPropertyDetails(for: prop)
                             }
-                            
-                            
                     }
                 }
                 

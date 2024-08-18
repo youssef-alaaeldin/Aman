@@ -6,10 +6,10 @@
 //
 
 import Foundation
-
-struct Property: Identifiable {
+import FirebaseFirestore
+struct Property: Identifiable, Codable {
     
-    let id: UUID
+    @DocumentID var id: String?
     let name: String
     let description: String
     let type: PropertyType
@@ -20,7 +20,7 @@ struct Property: Identifiable {
     let size: Double // in square meters
     let images: [String]
     
-    enum PropertyType: String, CaseIterable {
+    enum PropertyType: String, CaseIterable, Codable {
         case All
         case House
         case Villa

@@ -217,6 +217,7 @@ struct RegisterView: View {
             do  {
                 try await authViewModel.createUser(withEmail: authViewModel.email, password: authViewModel.password, fullName: fullName)
                 self.coordinator.push(.main)
+                reset()
             } catch {
                 showWarnings = true
                 print("Error creating user \(error.localizedDescription)")
@@ -234,6 +235,7 @@ struct RegisterView: View {
                 try await authViewModel.signIn(withEmail: authViewModel.email, password: authViewModel.password)
                 
                 self.coordinator.push(.main)
+                reset()
             } catch {
                 showWarnings = true
                 print("Error loging in \(error.localizedDescription)")
@@ -244,8 +246,8 @@ struct RegisterView: View {
     
     func reset() {
         fullName = ""
-        email = ""
-        password = ""
+        authViewModel.email = ""
+        authViewModel.password = ""
         isChecked = false
         showWarnings = false
         

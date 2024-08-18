@@ -9,24 +9,32 @@ import SwiftUI
 
 struct FavoriteView: View {
     
-    @StateObject private var properties = PropertyViewModel()
+    @EnvironmentObject private var properties : PropertyViewModel
     
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                ForEach(properties.properties, id: \.id) {
-                    prop in
-                    
-                    FavoriteCardView(property: prop)
+                if !properties.favorites.isEmpty {
+                    ForEach(properties.favorites, id: \.id) {
+                        prop in
+                        FavoriteCardView(property: prop)
+                    }
                 }
-                Spacer()
+                else {
+                    Text("No favorites yet, add some!")
+                        .font(FontStyles.Heading.h3)
+                        .foregroundStyle(Colors.Neutrals.n900)
+                }
             }
-            .navigationTitle("Favorites")
-            
+            Spacer()
+        }
+        .navigationTitle("Favorites")
+        
+        .padding()
+        .onAppear {
             
         }
-        .padding()
-//        .navigationTitle("Favorites")
+        //        .navigationTitle("Favorites")
     }
 }
 

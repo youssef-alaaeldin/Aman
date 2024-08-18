@@ -14,11 +14,11 @@ enum PropertyIcon {
 struct PropertyCardView: View {
     let property : Property
     @State var isFavorite = false
-    
+    @EnvironmentObject var propertyViewModel : PropertyViewModel
     @EnvironmentObject private var coordinator : Coordinator
     var body: some View {
         
-       
+        
         ZStack ( alignment: .top) {
             
             RoundedRectangle(cornerRadius: 15)
@@ -27,7 +27,7 @@ struct PropertyCardView: View {
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Colors.Neutrals.n200, lineWidth: 1)
                 )
-//                .frame(width: 162, height: 268)
+            //                .frame(width: 162, height: 268)
             
             VStack ( alignment: .leading, spacing: 5) {
                 ZStack {
@@ -38,27 +38,16 @@ struct PropertyCardView: View {
                         .clipShape(.rect(cornerRadius: 10))
                         .padding(.all , 11)
                     
-                    Button {
+                    FavoriteButton(isFavorite: $isFavorite, action: {
                         withAnimation {
                             isFavorite.toggle()
+                            propertyViewModel.toggleFavorite(for: property)
                         }
-                    } label: {
-                        Circle()
-                            .frame(width: 32, height: 32)
-                            .foregroundStyle(.white)
-                            .shadow(radius: 10)
-                            .overlay (alignment: .center) {
-                                Image(isFavorite ? "Heart" : "Favorite")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                            }
-                            
-                        
-                    }
+                    })
                     .offset(x: 40, y: 69)
                     
                 }
-//                VStack (spacing: 5) {
+                //                VStack (spacing: 5) {
                 Group {
                     HStack {
                         Image(systemName: "house")
@@ -90,12 +79,15 @@ struct PropertyCardView: View {
             
         }
         .frame(width: 162, height: 268)
-        
+        .onAppear {
+           
+            isFavorite = propertyViewModel.favorites.contains(where: { $0.id == property.id })
+        }
     }
 }
 
 #Preview {
-    PropertyCardView(property: Property(id: UUID(), name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, images: ["1", "2", "3", "4"]))
+    PropertyCardView(property: Property(id: nil, name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, images: ["1", "2", "3", "4"]))
 }
 
 extension Double {

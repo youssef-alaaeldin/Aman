@@ -10,6 +10,8 @@ import SwiftUI
 struct FavoriteCardView: View {
     
     let property: Property
+    @State var isFavorite = false
+    @EnvironmentObject var propertyViewModel : PropertyViewModel
     var body: some View {
         
 //        VStack {
@@ -31,21 +33,12 @@ struct FavoriteCardView: View {
                         
                         Spacer()
                         
-                        Button {
-                        
-                        } label: {
-                            Circle()
-                                .frame(width: 24, height: 24)
-                                .foregroundStyle(.white)
-                                .shadow(radius: 10)
-                                .overlay (alignment: .center) {
-                                    Image("Heart")
-                                        .resizable()
-                                        .frame(width: 15, height: 15)
-                                }
-                            
-                            
-                        }
+                        FavoriteButton(isFavorite: $isFavorite, action: {
+                            withAnimation {
+                                isFavorite.toggle()
+                                propertyViewModel.toggleFavorite(for: property)
+                            }
+                        })
 //                        Spacer()
                     }
                     
@@ -77,10 +70,14 @@ struct FavoriteCardView: View {
                 .stroke(Colors.Neutrals.n200, lineWidth: 1)
                
         )
+        .onAppear {
+            isFavorite = propertyViewModel.favorites.contains(where: { $0.id == property.id })
+        }
+        
         
     }
 }
 
 #Preview {
-    FavoriteCardView(property: Property(id: UUID(), name: "Youssef ", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, images: ["1", "2", "3", "4"]))
+    FavoriteCardView(property: Property(id: nil, name: "Youssef ", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, images: ["1", "2", "3", "4"]))
 }

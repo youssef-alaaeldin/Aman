@@ -18,7 +18,6 @@ struct MainView: View {
                     Group {
                         ExploreView()
                             .tag(Tab.Explore)
-                        
                         FavoriteView()
                             .tag(Tab.Favorite)
                         AccountView()
@@ -26,7 +25,6 @@ struct MainView: View {
                     }
                 }
             }
-            .navigationTitle(selectedTab == .Favorite ? "Favorites" : "Account")
             VStack {
                 Spacer()
                 CustomTabBar(selectedTab: $selectedTab)

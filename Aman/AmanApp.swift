@@ -11,6 +11,7 @@ import Firebase
 @main
 struct AmanApp: App {
     @StateObject var authViewModel = AuthViewModel()
+    @StateObject var propertyViewModel = PropertyViewModel()
     
     init() {
         FirebaseApp.configure()
@@ -20,6 +21,8 @@ struct AmanApp: App {
         WindowGroup {
             CoordinatorView()
                 .environmentObject(authViewModel)
+                .environmentObject(propertyViewModel)
+                
         }
     }
 }

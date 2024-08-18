@@ -6,18 +6,19 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct User: Identifiable, Codable {
-    let id: String
+    @DocumentID var id: String?
     let fullName: String
     let email: String
-    
-    
+    let role: String
+    var favoritePropertyIDs: [String] = []
     
 }
 
 
 extension User {
-    static var MOCK_USER = User(id: NSUUID().uuidString, fullName: "Joe", email: "test@gmail.com")
+    static var MOCK_USER = User(id: NSUUID().uuidString, fullName: "Joe", email: "test@gmail.com", role: "Regular")
 }
 
