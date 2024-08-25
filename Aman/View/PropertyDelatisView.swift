@@ -54,7 +54,7 @@ struct PropertyDelatisView: View {
     
     var imageSection: some View {
         VStack(alignment: .leading) {
-            ImageSlider(images: property.images)
+            ImageSlider(images: property.imageUrls)
             VStack(alignment: .leading, spacing: 5) {
                 
                 HStack {
@@ -196,6 +196,6 @@ struct PropertyDelatisView: View {
     }
 }
 
-#Preview {
-    PropertyDelatisView(property: Property(id: nil, name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, images: ["1", "2", "3", "4"]))
-}
+//#Preview {
+//    PropertyDelatisView(property: Property(id: nil, name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, images: ["1", "2", "3", "4"]))
+//}

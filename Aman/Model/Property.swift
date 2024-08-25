@@ -7,8 +7,8 @@
 
 import Foundation
 import FirebaseFirestore
+
 struct Property: Identifiable, Codable {
-    
     @DocumentID var id: String?
     let name: String
     let description: String
@@ -18,12 +18,15 @@ struct Property: Identifiable, Codable {
     let numberOfBedrooms: Int
     let numberOfBathrooms: Int
     let size: Double // in square meters
-    let images: [String]
-    
+    var imageUrls: [String] = [] // Stores the URLs of the images
+
     enum PropertyType: String, CaseIterable, Codable {
         case All
         case House
         case Villa
         case Apartment
     }
+    
+    // Computed property for handling image URLs if needed
+//    var images: [UIImage] = []
 }

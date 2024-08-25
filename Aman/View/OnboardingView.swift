@@ -101,12 +101,12 @@ struct OnboardingView: View {
                     }
                 }
                 else {
-//                    if auth.userSession != nil {
-//                        coordinator.push(.main)
-//                    }
-//                    else {
+                    if auth.userSession != nil {
+                        coordinator.push(.main)
+                    }
+                    else {
                         coordinator.push(.register)
-//                    }
+                    }
                 }
             }
             

@@ -19,7 +19,7 @@ enum Page: String, Identifiable {
 
 enum Sheet: String, Identifiable {
     
-    case register
+    case register, addProperty
     
     var id: String {
         self.rawValue
@@ -105,7 +105,10 @@ class Coordinator: ObservableObject {
         switch sheet {
         case .register:
             RegisterView()
+        case .addProperty:
+            AddPropertyView()
         }
+
     }
     
     @ViewBuilder

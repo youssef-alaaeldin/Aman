@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 //class PropertyViewModel : ObservableObject {
 //
@@ -50,9 +51,12 @@ import Combine
 class PropertyViewModel: ObservableObject {
     @Published var properties: [Property] = []
     @Published var favorites: [Property] = []
+    
     private let propertyService = PropertyService()
     private let userService = UserService()
     private var cancellables = Set<AnyCancellable>()
+    
+    
     
     init() {
         loadProperties()
@@ -122,8 +126,43 @@ class PropertyViewModel: ObservableObject {
         }
     }
     
-    func addSampleData() {
-        propertyService.addSampleData()
+    func addProperty(
+            name: String,
+            description: String,
+            type: Property.PropertyType,
+            price: Double,
+            location: String,
+            numberOfBedrooms: Int,
+            numberOfBathrooms: Int,
+            size: Double,
+            images: [String],
+            completion: @escaping (Result<Void, Error>) -> Void
+        ) {
+            let property = Property(
+                id: nil,
+                name: name,
+                description: description,
+                type: type,
+                price: price,
+                location: location,
+                numberOfBedrooms: numberOfBedrooms,
+                numberOfBathrooms: numberOfBathrooms,
+                size: size,
+                imageUrls: images
+            )
+
+            propertyService.addProperty(property) { [weak self] result in
+
+                switch result {
+                case .success:
+                    // Append the new property to the published properties array
+                    self?.properties.append(property)
+                    completion(.success(()))
+                case .failure(let error):
+                    print("Error adding property: \(error)")
+                    completion(.failure(error))
+                }
+            }
     }
 }
 

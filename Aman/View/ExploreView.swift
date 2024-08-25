@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ExploreView: View {
     
@@ -24,44 +25,20 @@ struct ExploreView: View {
     var body: some View {
         ScrollView(.vertical) {
             VStack (spacing: 24) {
+                
+                
                 searchBar
                 banners
                 
                 FilterButtonsView(selectedChoice: $selectedChoice)
                 
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(properties.filterProperties(by: selectedChoice), id: \.id) { prop in
-                        PropertyCardView(property: prop)
-                            .onTapGesture {
-                                coordinator.showPropertyDetails(for: prop)
-                            }
-                    }
-                }
+                propertiesList
                 
                 Spacer()
             }
-            .navigationTitle("Explore")
         }
     }
     
-    var banners: some View {
-        
-        ScrollViewReader { scrollViewProxy in
-            ScrollView(.horizontal) {
-                HStack(alignment: .center, spacing: 15) {
-                    ForEach(0..<6, id: \.self) { index in
-                        Image("Banner")
-                    }
-                }
-                .padding(.horizontal)
-            }
-            .onAppear {
-                scrollViewProxy.scrollTo(2, anchor: .center)
-            }
-            
-        }
-        .scrollIndicators(.hidden)
-    }
     
     var searchBar: some View {
         HStack(spacing: 0) {
@@ -83,6 +60,38 @@ struct ExploreView: View {
         )
         .padding()
     }
+    
+    var banners: some View {
+        
+        ScrollViewReader { scrollViewProxy in
+            ScrollView(.horizontal) {
+                HStack(alignment: .center, spacing: 15) {
+                    ForEach(0..<6, id: \.self) { index in
+                        Image("Banner")
+                    }
+                }
+                .padding(.horizontal)
+            }
+            .onAppear {
+                scrollViewProxy.scrollTo(2, anchor: .center)
+            }
+            
+        }
+        .scrollIndicators(.hidden)
+    }
+    
+    
+    var propertiesList: some View {
+        LazyVGrid(columns: columns, spacing: 20) {
+            ForEach(properties.filterProperties(by: selectedChoice), id: \.id) { prop in
+                PropertyCardView(property: prop)
+                    .onTapGesture {
+                        coordinator.showPropertyDetails(for: prop)
+                    }
+            }
+        }
+    }
+    
 }
 
 #Preview {

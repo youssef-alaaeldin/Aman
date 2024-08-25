@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SDWebImageSwiftUI
 struct ImageSlider: View {
     
     let images : [String]
@@ -18,7 +18,8 @@ struct ImageSlider: View {
                 ForEach(0..<images.count, id:\.self) {
                     index in
                     
-                    Image(images[index])
+//                    Image(images[index])
+                    WebImage(url: URL(string: images[index]))
                         .resizable()
                         .renderingMode(.original)
                         .tag(index)
@@ -31,6 +32,6 @@ struct ImageSlider: View {
     }
 }
 
-#Preview {
-    ImageSlider(images: ["1", "2" ,"3", "4"])
-}
+//#Preview {
+//    ImageSlider(images: ["1", "2" ,"3", "4"])
+//}

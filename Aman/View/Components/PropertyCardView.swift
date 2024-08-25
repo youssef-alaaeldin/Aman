@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 enum PropertyIcon {
     
@@ -31,7 +32,7 @@ struct PropertyCardView: View {
             
             VStack ( alignment: .leading, spacing: 5) {
                 ZStack {
-                    Image(property.images.first ?? "1")
+                    WebImage(url: URL(string: property.imageUrls.first ?? ""))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 140, height: 146)
@@ -86,9 +87,9 @@ struct PropertyCardView: View {
     }
 }
 
-#Preview {
-    PropertyCardView(property: Property(id: nil, name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, images: ["1", "2", "3", "4"]))
-}
+//#Preview {
+//    PropertyCardView(property: Property(id: nil, name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, images: ["1", "2", "3", "4"]))
+//}
 
 extension Double {
     func formattedAsCurrency() -> String {
