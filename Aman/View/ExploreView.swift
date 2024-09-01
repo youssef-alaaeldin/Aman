@@ -14,6 +14,8 @@ struct ExploreView: View {
     
     @State private var searchValue: String = ""
     @State private var selectedChoice : Property.PropertyType = .All
+    @State private var navigatingToSearchView = false
+    @FocusState private var isSearchFieldFocus : Bool
     
     @EnvironmentObject private var coordinator: Coordinator
     let columns = [
@@ -27,7 +29,17 @@ struct ExploreView: View {
             VStack (spacing: 24) {
                 
                 
-                searchBar
+                SearchBar(searchValue: $searchValue, title: "Search")
+                    .focused($isSearchFieldFocus)
+                    .onTapGesture {
+                        navigatingToSearchView = true
+                        coordinator.push(.searchView)
+                    }
+                    .onChange(of: navigatingToSearchView) { oldValue, newValue in
+                        if newValue {
+                            isSearchFieldFocus = false
+                        }
+                    }
                 banners
                 
                 FilterButtonsView(selectedChoice: $selectedChoice)
@@ -37,28 +49,10 @@ struct ExploreView: View {
                 Spacer()
             }
         }
-    }
-    
-    
-    var searchBar: some View {
-        HStack(spacing: 0) {
-            Image(systemName: "magnifyingglass")
-                .offset(x: 10)
-            
-            TextField(text: $searchValue) {
-                
-                Text("Search real estate")
-                    .font(FontStyles.Body.mediumRegular)
-                    .foregroundStyle(Colors.Neutrals.n600)
-            }
-            .padding()
-            .clipShape(.rect(cornerRadius: 8))
+        .onAppear {
+            print("properties : \(properties.properties.count)")
+            print(" favorites : \(properties.favorites.count)")
         }
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Colors.Neutrals.n200, lineWidth: 1)
-        )
-        .padding()
     }
     
     var banners: some View {

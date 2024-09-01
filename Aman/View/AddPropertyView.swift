@@ -147,6 +147,8 @@ struct AddPropertyView: View {
                 ) { result in
                     switch result {
                     case .success:
+                        viewModel.loadProperties()
+                        viewModel.loadFavorites()
                         print("Property successfully added.")
                         self.isAddingProperty = false
                         presentationMode.wrappedValue.dismiss()
@@ -209,15 +211,15 @@ struct AddPropertyView: View {
                     }
                     
                     if let url = url {
-                        DispatchQueue.main.async {
-                            uploadedImages.append(url.absoluteString)
-                            print("Successfully stored image with URL: \(url.absoluteString)")
-                        }
+                        uploadedImages.append(url.absoluteString)
+                        print("Successfully stored image with URL: \(url.absoluteString)")
                     }
                     
                     // Increment the counter and check if all uploads are complete
                     uploadCount += 1
                     if uploadCount == totalImages {
+                        print("images selected \(images.count)")
+                        print("images uploaded \(uploadedImages.count)")
                         completion(true)  // All images uploaded successfully
                     }
                 }

@@ -10,7 +10,7 @@ import SwiftUI
 
 enum Page: String, Identifiable {
     
-    case onboarding, register, main , propertyDetails
+    case onboarding, register, main , propertyDetails, searchView
     
     var id: String {
         self.rawValue
@@ -97,6 +97,8 @@ class Coordinator: ObservableObject {
                 PropertyDelatisView(property: property)
             }
         
+        case .searchView:
+            SearchView()
         }
     }
     

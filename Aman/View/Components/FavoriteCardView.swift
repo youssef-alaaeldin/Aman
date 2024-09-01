@@ -74,6 +74,9 @@ struct FavoriteCardView: View {
         .onAppear {
             isFavorite = propertyViewModel.favorites.contains(where: { $0.id == property.id })
         }
+        .onChange(of: isFavorite) { oldValue, newValue in
+            propertyViewModel.loadFavorites()
+        }
         
         
     }

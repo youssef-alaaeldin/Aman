@@ -126,6 +126,10 @@ class PropertyViewModel: ObservableObject {
         }
     }
     
+    func searchProperty(by description: String) -> [Property] {
+        return properties.filter { $0.description.contains(description)}
+    }
+    
     func addProperty(
             name: String,
             description: String,

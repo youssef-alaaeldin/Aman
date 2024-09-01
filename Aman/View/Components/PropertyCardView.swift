@@ -83,6 +83,9 @@ struct PropertyCardView: View {
         .onAppear {
            
             isFavorite = propertyViewModel.favorites.contains(where: { $0.id == property.id })
+//            propertyViewModel.loadProperties()
+            
+        
         }
     }
 }
