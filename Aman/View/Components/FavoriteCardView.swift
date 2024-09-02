@@ -11,7 +11,8 @@ struct FavoriteCardView: View {
     
     let property: Property
     @State var isFavorite = false
-    @EnvironmentObject var propertyViewModel : PropertyViewModel
+    @EnvironmentObject private var propertyViewModel : PropertyViewModel
+    @EnvironmentObject private var coordinator: Coordinator
     var body: some View {
         
 //        VStack {
@@ -77,6 +78,10 @@ struct FavoriteCardView: View {
         .onChange(of: isFavorite) { oldValue, newValue in
             propertyViewModel.loadFavorites()
         }
+        .onTapGesture {
+            coordinator.showPropertyDetails(for: property)
+        }
+
         
         
     }

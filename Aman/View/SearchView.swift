@@ -11,13 +11,15 @@ struct SearchView: View {
     @State private var searchText : String = ""
     @FocusState private var isSearchViewFieldFocus: Bool
     @EnvironmentObject private var coordinator: Coordinator
-    
+    @EnvironmentObject private var viewModel: PropertyViewModel
     @State private var recentSearchItems = [String]()
+    
+    @State private var showSearchedProperties = false
     
     private let columns = [GridItem(.adaptive(minimum: 100, maximum: 200), spacing: 10)]
     
     var body: some View {
-        ScrollView {
+        
             VStack(spacing: 16) {
                 HStack(spacing: 0) {
                     Button {
@@ -33,19 +35,35 @@ struct SearchView: View {
                             isSearchViewFieldFocus = true
                         }
                         .onSubmit {
-                            recentSearchItems.append(searchText)
-                            searchText = ""
+                            if !searchText.isEmpty {
+                                recentSearchItems.append(searchText)
+                                showSearchedProperties = true
+                            }
+                            print("submit")
+                        }
+                        .onTapGesture {
+                            showSearchedProperties = false 
                         }
                 }
                 Divider()
                     .padding(.horizontal, -10)
                 
-                recentSearch
+                ScrollView {
+                    
+                    if isSearchViewFieldFocus {
+                        recentSearch
+                        
+                    }
+                    
+                    if showSearchedProperties && !searchText.isEmpty {
+                        propertiesList
+                    }
+                }
                 Spacer()
             }
             .padding()
             .navigationBarBackButtonHidden()
-        }
+        
     }
     
     private var recentSearch: some View {
@@ -76,6 +94,19 @@ struct SearchView: View {
             }
         }
         .padding(.vertical)
+    }
+    
+    private var propertiesList: some View {
+        VStack(alignment: .leading) {
+            Text("\(viewModel.searchProperty(by: searchText).count) ads found")
+                .foregroundStyle(Colors.Neutrals.n900)
+                .font(FontStyles.Body.largeBold)
+            
+            ForEach(viewModel.searchProperty(by: searchText), id: \.id) { prop in
+                FavoriteCardView(property: prop)
+                
+            }
+        }
     }
     
     struct SearchTagView: View {
