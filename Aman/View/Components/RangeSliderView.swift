@@ -14,64 +14,74 @@ struct RangeSliderView: View {
     
     let range: ClosedRange<Double>
     let step: Double
-    
+    let sliderWidth: CGFloat = 343 // Fixed width for the slider
     
     @State private var startX: CGFloat = 0
     @State private var endX: CGFloat = 0
+    private let thumbSize: CGFloat = 18
     
     var body: some View {
-        GeometryReader { geometry in
-            let width = geometry.size.width
-            
+        VStack {
+            // Background Track
             ZStack(alignment: .leading) {
-                // Background track
                 Rectangle()
                     .fill(Colors.Neutrals.n200)
-                    .frame(height: 4)
+                    .frame(width: sliderWidth, height: 4)
                 
-                // Range track
+                // Range Track
                 Rectangle()
                     .fill(Colors.Primary.p500)
                     .frame(width: endX - startX, height: 4)
                     .offset(x: startX)
                 
-                // Minimum thumb
+                // Minimum Thumb
                 Circle()
                     .fill(Colors.Neutrals.n50)
                     .overlay(Circle().stroke(Colors.Primary.p500, lineWidth: 5))
-                    .frame(width: 18, height: 18)
-                    .offset(x: startX - 18 / 2)
-//                    .offset(x: startX)
+                    .frame(width: thumbSize, height: thumbSize)
+                    .offset(x: startX - thumbSize / 2)
                     .gesture(
                         DragGesture()
                             .onChanged { value in
-                                
-                                let newX = min(max(0, value.location.x), endX)
-                                startX = snapToStep(newX - 18, width: width)
-                                minValue = mapToRange(startX / width)
+                                let newX = min(max(0, value.location.x), endX - thumbSize) // Prevent crossing
+                                startX = snapToStep(newX, width: sliderWidth)
+                                minValue = mapToRange(startX / sliderWidth)
                             }
                     )
                 
-                // Maximum thumb
+                // Maximum Thumb
                 Circle()
                     .fill(Colors.Neutrals.n50)
                     .overlay(Circle().stroke(Colors.Primary.p500, lineWidth: 5))
-                    .frame(width: 18, height: 18)
-                    .offset(x: endX - 18 / 2)
-//                    .offset(x: endX)
+                    .frame(width: thumbSize, height: thumbSize)
+                    .offset(x: endX - thumbSize / 2)
                     .gesture(
                         DragGesture()
                             .onChanged { value in
-                                let newX = max(min(width, value.location.x), startX)
-                                endX = snapToStep(newX + 18, width: width)
-                                maxValue = mapToRange(endX / width)
+                                let newX = max(min(sliderWidth, value.location.x), startX + thumbSize) // Prevent crossing
+                                endX = snapToStep(newX, width: sliderWidth)
+                                maxValue = mapToRange(endX / sliderWidth)
                             }
                     )
             }
-            .onAppear {
-                startX = CGFloat(mapFromRange(minValue) * width)
-                endX = CGFloat(mapFromRange(maxValue) * width)
-            }
+        }
+        .frame(width: sliderWidth + thumbSize) // Set a fixed frame
+        .onAppear {
+            // Initialize thumb positions
+            updateThumbs()
+        }
+        .onChange(of: minValue) { _, _ in
+            updateThumbs()
+        }
+        .onChange(of: maxValue) { _, _ in
+            updateThumbs()
+        }
+    }
+    
+    private func updateThumbs() {
+        withAnimation {
+            startX = CGFloat(mapFromRange(minValue) * sliderWidth)
+            endX = CGFloat(mapFromRange(maxValue) * sliderWidth)
         }
     }
     
@@ -89,6 +99,7 @@ struct RangeSliderView: View {
         return (value - range.lowerBound) / (range.upperBound - range.lowerBound)
     }
 }
+
 #Preview {
     RangeSliderView(minValue: .constant(0), maxValue: .constant(1_000_000), range: 0...1_000_000, step: 10_000)
 }

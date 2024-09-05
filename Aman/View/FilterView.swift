@@ -15,6 +15,11 @@ struct FilterView: View {
     
     @State private var minArea: Double = 0
     @State private var maxArea: Double = 10_000
+    
+    @State private var bathroom = 2
+    @State private var bedrooms = 2
+    
+    @State private var selectedSort: SortOptions = .None
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -43,6 +48,18 @@ struct FilterView: View {
                 Divider()
                 
                 areaSection
+                
+                Divider()
+                
+                facilitiesSection
+                
+                Divider()
+                
+                sortSection
+                
+                Divider()
+                
+                applySection
             }
             .padding()
         }
@@ -91,6 +108,83 @@ struct FilterView: View {
         }
     }
     
+    var facilitiesSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Facilities")
+                .font(FontStyles.Body.largeMedium)
+                .foregroundStyle(Colors.Neutrals.n900)
+            
+            CustomStepper(value: $bathroom, title: "Bathroom")
+            
+            CustomStepper(value: $bedrooms, title: "Bedroom")
+            
+        }
+    }
+    
+    var sortSection: some View {
+        
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Sort")
+                .font(FontStyles.Body.largeMedium)
+                .foregroundStyle(Colors.Neutrals.n900)
+            
+            SortButtons(selectedChoice: $selectedSort)
+        }
+    }
+    
+    var applySection: some View {
+        HStack(alignment: .center) {
+            
+            Button {
+                resetFilters()
+            } label: {
+                Text("Reset")
+                    .foregroundStyle(Colors.Primary.p200)
+            }
+            .frame(width: 98, height: 52)
+            .background(Colors.Neutrals.n50)
+            .clipShape(.rect(cornerRadius: 8))
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Colors.Neutrals.n200, lineWidth: 1)
+            )
+            Button {
+                //APPLY FILTERS
+                applyFilters()
+            } label: {
+                Text("Apply")
+                    .font(FontStyles.Body.mediumBold)
+                    .foregroundStyle(Colors.Neutrals.n50)
+            }
+            .frame(width: 255, height: 52)
+            .background(Colors.Primary.p500)
+            .clipShape(.rect(cornerRadius: 8))
+        }
+            
+        
+    }
+    
+    private func resetFilters() {
+        minPrice = 0
+        maxPrice = 1_000_000
+        minArea = 0
+        maxArea = 10_000
+        bedrooms = 2
+        bathroom = 2
+        selectedType = .All
+        selectedSort = .None
+    }
+    
+    private func applyFilters() {
+        print(" max area: \(maxArea)")
+        print(" min area: \(minArea)")
+        print(" max price: \(maxPrice)")
+        print(" min price: \(minPrice)")
+        print(" applied category: \(selectedType)")
+        print(" applied sort: \(selectedSort)")
+        print(" beedrooms: \(bedrooms)")
+        print(" bathrooms: \(bathroom)")
+    }
 }
 
 #Preview {

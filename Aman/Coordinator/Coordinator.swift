@@ -19,7 +19,7 @@ enum Page: String, Identifiable {
 
 enum Sheet: String, Identifiable {
     
-    case register, addProperty
+    case register, addProperty, filters
     
     var id: String {
         self.rawValue
@@ -109,6 +109,8 @@ class Coordinator: ObservableObject {
             RegisterView()
         case .addProperty:
             AddPropertyView()
+        case .filters:
+            FilterView()
         }
 
     }

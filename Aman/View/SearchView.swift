@@ -63,6 +63,9 @@ struct SearchView: View {
             }
             .padding()
             .navigationBarBackButtonHidden()
+            .onAppear {
+                showSearchedProperties = false 
+            }
         
     }
     
@@ -98,6 +101,24 @@ struct SearchView: View {
     
     private var propertiesList: some View {
         VStack(alignment: .leading) {
+            Button {
+                coordinator.present(sheet: .filters)
+            } label: {
+                HStack {
+                    Text("Filter")
+                    Image("Filter")
+                }
+                .foregroundStyle(Colors.Neutrals.n900)
+                .font(FontStyles.Body.smallRegular)
+            }
+            .frame(width: 79, height: 33)
+            .background(Colors.Neutrals.n50)
+            .clipShape(.rect(cornerRadius: 8))
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Colors.Neutrals.n200, lineWidth: 1)
+            )
+            
             Text("\(viewModel.searchProperty(by: searchText).count) ads found")
                 .foregroundStyle(Colors.Neutrals.n900)
                 .font(FontStyles.Body.largeBold)
