@@ -10,13 +10,17 @@ import SwiftUI
 struct PropertyDelatisView: View {
     
     @EnvironmentObject var coordinator: Coordinator
+    @EnvironmentObject private var viewModel: PropertyViewModel
     @State var isViewMorePress = false
+    @State private var showDeleteConfirmation = false
     
+   
     let property : Property
     
     var body: some View {
         
         ScrollView {
+            
             VStack (alignment: .leading, spacing: 0) {
                 imageSection
                 
@@ -39,16 +43,31 @@ struct PropertyDelatisView: View {
                 descriptionSection
                 
                 Spacer()
+                
+                
             }
         }
         .overlay(
-            TopNavBar {
+            TopNavBar(backAction: {
                 coordinator.pop()
-            }
+            }, deleteAction: {
+                viewModel.deleteProperty(property) { success in
+                    if success {
+                        coordinator.pop()
+                    } else {
+                        print("Failed to delete property.")
+                    }
+                }
+            }, showDeleteDialog: {
+                showDeleteConfirmation = true
+            }, showDeleteConfirmation: $showDeleteConfirmation)
                 .offset(y: 50)
+            
+            
         )
         .navigationBarBackButtonHidden()
         .ignoresSafeArea()
+        
         
     }
     

@@ -67,12 +67,12 @@ import FirebaseAuth
 class PropertyService {
     
     private var db = Firestore.firestore()
-    
+    private let collectionName = "properties"
     // Function to add a property to Firebase Firestore
     func addProperty(_ property: Property, completion: @escaping (Result<Void, Error>) -> Void) {
         do {
             // Try to encode the Property object and add it to the "properties" collection
-            let _ = try db.collection("properties").addDocument(from: property) { error in
+            let _ = try db.collection(collectionName).addDocument(from: property) { error in
                 if let error = error {
                     completion(.failure(error))
                 } else {
@@ -84,9 +84,19 @@ class PropertyService {
         }
     }
     
+    func deleteProperty(propertyID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+            db.collection(collectionName).document(propertyID).delete { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        }
+    
     // Function to fetch properties from Firebase Firestore
     func fetchProperties(completion: @escaping (Result<[Property], Error>) -> Void) {
-        db.collection("properties").getDocuments { snapshot, error in
+        db.collection(collectionName).getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
             } else {

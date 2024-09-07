@@ -18,6 +18,8 @@ struct ExploreView: View {
     @FocusState private var isSearchFieldFocus : Bool
     
     @EnvironmentObject private var coordinator: Coordinator
+    
+    @State private var isLoading = true
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -45,6 +47,7 @@ struct ExploreView: View {
                 FilterButtonsView(selectedChoice: $selectedChoice)
                 
                 propertiesList
+                    .redacted(reason: properties.isLoading ? .placeholder : [])
                 
                 Spacer()
             }
@@ -53,6 +56,7 @@ struct ExploreView: View {
             print("properties : \(properties.properties.count)")
             print(" favorites : \(properties.favorites.count)")
         }
+        
     }
     
     var banners: some View {
@@ -85,6 +89,8 @@ struct ExploreView: View {
             }
         }
     }
+    
+    
     
 }
 

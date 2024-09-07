@@ -36,7 +36,10 @@ struct SearchView: View {
                         }
                         .onSubmit {
                             if !searchText.isEmpty {
-                                recentSearchItems.append(searchText)
+                                if !recentSearchItems.contains(searchText) {
+                                    recentSearchItems.append(searchText)
+                                }
+                                viewModel.searchProperty(by: searchText)
                                 showSearchedProperties = true
                             }
                             print("submit")
@@ -56,16 +59,31 @@ struct SearchView: View {
                     }
                     
                     if showSearchedProperties && !searchText.isEmpty {
-                        propertiesList
+                        if !viewModel.searchedProperties.filter({ $0.description.localizedStandardContains(searchText)}).isEmpty {
+                            propertiesList
+                        } else {
+                            
+                            notFoundProperty
+                        }
                     }
                 }
-                Spacer()
+//                Spacer()
             }
             .padding()
             .navigationBarBackButtonHidden()
             .onAppear {
-                showSearchedProperties = false 
+                if searchText.isEmpty {
+                showSearchedProperties = false
+                } else {
+                    showSearchedProperties = true
+                    isSearchViewFieldFocus = false
+                }
+                print("Filtered Properties: \(viewModel.searchedProperties.count)")
             }
+            .onDisappear {
+                print("Disappear")
+            }
+            
         
     }
     
@@ -93,6 +111,12 @@ struct SearchView: View {
                     SearchTagView(search: search) {
                         recentSearchItems.removeAll { $0 == search}
                     }
+                    .onTapGesture {
+                        searchText = search
+                        viewModel.searchProperty(by: search)
+                        isSearchViewFieldFocus = false
+                        showSearchedProperties = true
+                    }
                 }
             }
         }
@@ -101,6 +125,7 @@ struct SearchView: View {
     
     private var propertiesList: some View {
         VStack(alignment: .leading) {
+            
             Button {
                 coordinator.present(sheet: .filters)
             } label: {
@@ -119,15 +144,32 @@ struct SearchView: View {
                     .stroke(Colors.Neutrals.n200, lineWidth: 1)
             )
             
-            Text("\(viewModel.searchProperty(by: searchText).count) ads found")
+            
+            Text("\(viewModel.searchedProperties.filter { $0.description.localizedStandardContains(searchText)}.count) ads found")
                 .foregroundStyle(Colors.Neutrals.n900)
                 .font(FontStyles.Body.largeBold)
             
-            ForEach(viewModel.searchProperty(by: searchText), id: \.id) { prop in
-                FavoriteCardView(property: prop)
-                
-            }
+            ForEach(viewModel.searchedProperties.filter { $0.description.localizedStandardContains(searchText)}, id: \.id) { prop in
+                    
+                    FavoriteCardView(property: prop)
+                    
+                }
+            
         }
+    }
+    
+    var notFoundProperty: some View {
+        Group {
+            Text("Not Found")
+                .foregroundStyle(Colors.Neutrals.n900)
+                .font(FontStyles.Heading.h4)
+            
+            Text("No results from \(searchText), try with other keywords")
+                .foregroundStyle(Colors.Neutrals.n600)
+                .multilineTextAlignment(.center)
+            
+        }
+        
     }
     
     struct SearchTagView: View {
@@ -140,6 +182,7 @@ struct SearchView: View {
                     .font(.subheadline)
                     .foregroundStyle(Colors.Neutrals.n600)
                     .padding(.leading, 10)
+                    
                 
                 Button(action: onRemove) {
                     Image(systemName: "xmark")
@@ -153,6 +196,8 @@ struct SearchView: View {
             .cornerRadius(8)
         }
     }
+    
+    
 }
 
 #Preview {

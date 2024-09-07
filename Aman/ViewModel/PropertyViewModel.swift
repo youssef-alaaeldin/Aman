@@ -9,48 +9,12 @@ import Foundation
 import Combine
 import SwiftUI
 
-//class PropertyViewModel : ObservableObject {
-//
-//    @Published var properties : [Property] = []
-//
-//    init() {
-//        loadProperties()
-//    }
-//
-//    func loadProperties() {
-//        properties = [
-//            Property(id: UUID(), name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 123123, location: "Tagmo3", numberOfBedrooms: 2, numberOfBathrooms: 3, size: 125, images: ["1", "2", "3", "4"]),
-//
-//            Property(id: UUID(), name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Villa, price: 24432, location: "Tagmo3", numberOfBedrooms: 1, numberOfBathrooms: 2, size: 148, images: ["2", "1", "3", "4"]),
-//
-//            Property(id: UUID(), name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .House, price: 554332, location: "Fesal", numberOfBedrooms: 3, numberOfBathrooms: 2, size: 100, images: ["3", "2", "1", "4"]),
-//
-//            Property(id: UUID(), name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Villa, price: 433355, location: "helmya", numberOfBedrooms: 2, numberOfBathrooms: 3, size: 123, images: ["4", "3", "2", "1"]),
-//
-//            Property(id: UUID(), name: "Youssef alaa", description: "Rumah pakuwon city is located in Surabaya City which is not far from the city center. This house was made in 2010 with a minimalist and modern architecture suitable for families", type: .Apartment, price: 553221, location: "Tagmo3", numberOfBedrooms: 3, numberOfBathrooms: 1, size: 255, images: ["1", "2", "3", "4"])
-//        ]
-//
-//    }
-//
-//    func filterProperties(by type: Property.PropertyType) -> [Property] {
-//
-//        if type == .All {
-//            return properties
-//        } else {
-//            return properties.filter { $0.type == type }
-//        }
-//    }
-//}
-
-
-
-
-// CHATGPT
-
 
 class PropertyViewModel: ObservableObject {
     @Published var properties: [Property] = []
     @Published var favorites: [Property] = []
+    @Published var searchedProperties: [Property] = []
+    @Published var isLoading = true
     
     private let propertyService = PropertyService()
     private let userService = UserService()
@@ -67,6 +31,7 @@ class PropertyViewModel: ObservableObject {
         propertyService.fetchProperties { [weak self] result in
             switch result {
             case .success(let properties):
+                self?.isLoading = false
                 self?.properties = properties
             case .failure(let error):
                 print("Error fetching properties: \(error)")
@@ -126,47 +91,113 @@ class PropertyViewModel: ObservableObject {
         }
     }
     
-    func searchProperty(by description: String) -> [Property] {
-        return properties.filter { $0.description.contains(description)}
+    func filterPropertiesSearch(by type: Property.PropertyType) {
+        if type == .All {
+            searchedProperties = properties
+        } else {
+            searchedProperties = properties.filter { $0.type == type }
+        }
+    }
+    
+    func filterPropertiesByPriceRange(minPrice: Double, maxPrice: Double) {
+        searchedProperties = searchedProperties.filter { $0.price >= minPrice && $0.price <= maxPrice }
+    }
+    
+    func filterPropertiesByArea(minArea: Double, maxArea: Double) {
+        searchedProperties = searchedProperties.filter { $0.size >= minArea && $0.size <= maxArea }
+    }
+    
+    func filterPropertiesByBedrooms(_ numberOfBedrooms: Int) {
+        searchedProperties = searchedProperties.filter { $0.numberOfBedrooms == numberOfBedrooms }
+    }
+    
+    func filterPropertiesByBathrooms(_ numberOfBathrooms: Int) {
+        searchedProperties = searchedProperties.filter { $0.numberOfBathrooms == numberOfBathrooms }
+    }
+    
+    
+    func sortProperties(by option: SortOptions) {
+        switch option {
+        case .None:
+            break
+        case .Newest:
+            break
+        case .HighestPrice:
+            searchedProperties.sort { $0.price > $1.price }
+        case .LoestPrice:
+            searchedProperties.sort { $0.price < $1.price }
+        }
+    }
+    
+    func applyFilters(type: Property.PropertyType, minPrice: Double, maxPrice: Double, minArea: Double, maxArea: Double, bedrooms: Int, bathrooms: Int, sortOption: SortOptions) {
+        filterPropertiesSearch(by: type)
+        filterPropertiesByPriceRange(minPrice: minPrice, maxPrice: maxPrice)
+        filterPropertiesByArea(minArea: minArea, maxArea: maxArea)
+        filterPropertiesByBedrooms(bedrooms)
+        filterPropertiesByBathrooms(bathrooms)
+        sortProperties(by: sortOption)
+    }
+    
+    func searchProperty(by description: String) {
+        searchedProperties.removeAll()
+        searchedProperties = properties.filter { $0.description.localizedCaseInsensitiveContains(description)}
     }
     
     func addProperty(
-            name: String,
-            description: String,
-            type: Property.PropertyType,
-            price: Double,
-            location: String,
-            numberOfBedrooms: Int,
-            numberOfBathrooms: Int,
-            size: Double,
-            images: [String],
-            completion: @escaping (Result<Void, Error>) -> Void
-        ) {
-            let property = Property(
-                id: nil,
-                name: name,
-                description: description,
-                type: type,
-                price: price,
-                location: location,
-                numberOfBedrooms: numberOfBedrooms,
-                numberOfBathrooms: numberOfBathrooms,
-                size: size,
-                imageUrls: images
-            )
-
-            propertyService.addProperty(property) { [weak self] result in
-
-                switch result {
-                case .success:
-                    // Append the new property to the published properties array
-                    self?.properties.append(property)
-                    completion(.success(()))
-                case .failure(let error):
-                    print("Error adding property: \(error)")
-                    completion(.failure(error))
-                }
+        name: String,
+        description: String,
+        type: Property.PropertyType,
+        price: Double,
+        location: String,
+        numberOfBedrooms: Int,
+        numberOfBathrooms: Int,
+        size: Double,
+        images: [String],
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        let property = Property(
+            id: nil,
+            name: name,
+            description: description,
+            type: type,
+            price: price,
+            location: location,
+            numberOfBedrooms: numberOfBedrooms,
+            numberOfBathrooms: numberOfBathrooms,
+            size: size,
+            imageUrls: images
+        )
+        
+        propertyService.addProperty(property) { [weak self] result in
+            
+            switch result {
+            case .success:
+                // Append the new property to the published properties array
+                self?.properties.append(property)
+                completion(.success(()))
+            case .failure(let error):
+                print("Error adding property: \(error)")
+                completion(.failure(error))
             }
+        }
     }
+    
+    func deleteProperty(_ property: Property, completion: @escaping (Bool) -> Void) {
+            guard let propertyID = property.id else { return }
+            
+        propertyService.deleteProperty(propertyID: propertyID) { [weak self] result in
+                    switch result {
+                    case .success:
+                        self?.properties.removeAll { $0.id == property.id }
+                        self?.searchedProperties.removeAll { $0.id == property.id }
+                        self?.favorites.removeAll { $0.id == property.id }
+                        print("Property deleted successfully.")
+                        completion(true)  // Indicate success
+                    case .failure(let error):
+                        print("Error deleting property: \(error)")
+                        completion(false)  // Indicate failure
+                    }
+                }
+        }
 }
 

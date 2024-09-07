@@ -9,12 +9,15 @@ import SwiftUI
 
 struct TopNavBar: View {
     
-    var action : () -> Void
+    var backAction : () -> Void
+    var deleteAction: () -> Void
+    var showDeleteDialog: () -> Void
+    @Binding var showDeleteConfirmation: Bool
     var body: some View {
         ZStack {
             HStack {
                 Button {
-                    action()
+                    backAction()
                 } label: {
                     Circle()
                         .frame(width: 40, height: 40)
@@ -30,21 +33,29 @@ struct TopNavBar: View {
                 }
                 Spacer()
                 Button {
-                    
+                    showDeleteDialog()
                 } label: {
                     Circle()
                         .frame(width: 40, height: 40)
                         .foregroundStyle(.white)
                         .shadow(radius: 10)
                         .overlay (alignment: .center) {
-                            Image(systemName: "ellipsis.circle")
-                                .resizable()
-                                .foregroundStyle(Colors.Neutrals.n900)
-                                .frame(width: 20, height: 20)
+                            Image(systemName: "trash")
+//                                .resizable()
+                                .foregroundStyle(.red)
+//                                .frame(width: 20, height: 20)
                         }
                     
                 }
-                
+                .buttonStyle(PlainButtonStyle())
+                .confirmationDialog("Are you sure you want to delete this property?", isPresented: $showDeleteConfirmation, titleVisibility: .visible) {
+                        Button("Delete", role: .destructive) {
+                            deleteAction()  // Perform delete action
+                        }
+                    Button("Cancel", role: .cancel) {
+                        // Cancel action (no need for additional code)
+                    }
+                }
             }
             .padding()
         }
