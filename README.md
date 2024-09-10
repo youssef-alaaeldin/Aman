@@ -14,11 +14,10 @@ Aman is a real estate application built using SwiftUI. It provides users with th
 - **Data Validation**: Input validation is achieved using Combine for efficient error handling and data consistency.
 
 ## Screenshots
-| ![1](Media/1.PNG) | ![2](Media/2.PNG) | ![3](Media/3.PNG) |
+| ![1](Media/1.png) | ![2](Media/2.png) | ![3](Media/3.png) |
 | --- | --- | --- |
-| ![4](Media/4.PNG) | ![5](Media/5.PNG) | ![6](Media/6.PNG) |
-| --- | --- | --- |
-| ![4](Media/7.PNG) | ![5](Media/8.PNG) | ![6](Media/9.PNG) |
+| ![4](Media/4.png) | ![5](Media/5.png) | ![6](Media/6.png) |
+| ![4](Media/7.png) | ![5](Media/8.png) | ![6](Media/9.png) |
 
 ## Technologies Used
 
