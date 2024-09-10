@@ -182,7 +182,9 @@ struct SearchView: View {
     
     private func loadRecentSearch() {
         
-        recentSearchItems = UserDefaults.standard.array(forKey: Constants.RecentSearches.recentSearchItemKey) as! [String]
+        if let items = UserDefaults.standard.array(forKey: Constants.RecentSearches.recentSearchItemKey) as? [String] {
+            recentSearchItems = items
+        }
         
         print(recentSearchItems)
        

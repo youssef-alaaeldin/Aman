@@ -65,6 +65,17 @@ class AuthViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    func updateUsername(newUsername: String) async {
+            guard let currentUser = self.currentUser else { return }
+            let userId = currentUser.id ?? ""
+            do {
+                try await Firestore.firestore().collection("users").document(userId).updateData(["fullName": newUsername])
+                self.currentUser?.fullName = newUsername
+            } catch {
+                print("Failed to update username: \(error.localizedDescription)")
+            }
+        }
+    
     func validateEmail(_ email: String) -> ValidateState {
         if email.isEmpty {
             return .invalid("Email annot be empty")
