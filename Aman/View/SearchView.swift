@@ -38,6 +38,7 @@ struct SearchView: View {
                             if !searchText.isEmpty {
                                 if !recentSearchItems.contains(searchText) {
                                     recentSearchItems.append(searchText)
+                                    saveRecentSearch()
                                 }
                                 viewModel.searchProperty(by: searchText)
                                 showSearchedProperties = true
@@ -46,6 +47,7 @@ struct SearchView: View {
                         }
                         .onTapGesture {
                             showSearchedProperties = false 
+                            
                         }
                 }
                 Divider()
@@ -79,6 +81,8 @@ struct SearchView: View {
                     isSearchViewFieldFocus = false
                 }
                 print("Filtered Properties: \(viewModel.searchedProperties.count)")
+                
+                loadRecentSearch()
             }
             .onDisappear {
                 print("Disappear")
@@ -98,6 +102,7 @@ struct SearchView: View {
                 Button {
                     //CLEAR THE ARRAY
                     recentSearchItems.removeAll()
+                    saveRecentSearch()
                 } label: {
                     Text("Clear All")
                         .foregroundStyle(Colors.Neutrals.n600)
@@ -110,6 +115,7 @@ struct SearchView: View {
                     search in
                     SearchTagView(search: search) {
                         recentSearchItems.removeAll { $0 == search}
+                        saveRecentSearch()
                     }
                     .onTapGesture {
                         searchText = search
@@ -170,6 +176,20 @@ struct SearchView: View {
             
         }
         
+    }
+    
+    //MARK: - User Defaults
+    
+    private func loadRecentSearch() {
+        
+        recentSearchItems = UserDefaults.standard.array(forKey: Constants.RecentSearches.recentSearchItemKey) as! [String]
+        
+        print(recentSearchItems)
+       
+    }
+    
+    private func saveRecentSearch() {
+        UserDefaults.standard.set(recentSearchItems, forKey: Constants.RecentSearches.recentSearchItemKey)
     }
     
     struct SearchTagView: View {

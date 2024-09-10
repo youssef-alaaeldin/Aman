@@ -165,7 +165,8 @@ class PropertyViewModel: ObservableObject {
             numberOfBedrooms: numberOfBedrooms,
             numberOfBathrooms: numberOfBathrooms,
             size: size,
-            imageUrls: images
+            imageUrls: images,
+            date: Date()
         )
         
         propertyService.addProperty(property) { [weak self] result in

@@ -81,7 +81,7 @@ struct ExploreView: View {
     
     var propertiesList: some View {
         LazyVGrid(columns: columns, spacing: 20) {
-            ForEach(properties.filterProperties(by: selectedChoice), id: \.id) { prop in
+            ForEach(properties.filterProperties(by: selectedChoice).sorted { $0.date > $1.date }, id: \.id) { prop in
                 PropertyCardView(property: prop)
                     .onTapGesture {
                         coordinator.showPropertyDetails(for: prop)

@@ -133,7 +133,8 @@ class PropertyService {
             numberOfBedrooms: numberOfBedrooms,
             numberOfBathrooms: numberOfBathrooms,
             size: size,
-            imageUrls: images
+            imageUrls: images,
+            date: Date()
         )
         
         // Add the sample property using the addProperty function

@@ -206,31 +206,31 @@ struct FilterView: View {
     // MARK: - UserDefaults Handling
     
     private func loadFilterValues() {
-        if let typeRawValue = UserDefaults.standard.string(forKey: Filters.selectedTypeKey),
+        if let typeRawValue = UserDefaults.standard.string(forKey: Constants.Filters.selectedTypeKey),
                let savedType = Property.PropertyType(rawValue: typeRawValue) {
                 selectedType = savedType
             }
-        minPrice = UserDefaults.standard.double(forKey: Filters.minPriceKey)
-        maxPrice = UserDefaults.standard.double(forKey: Filters.maxPriceKey)
-        minArea = UserDefaults.standard.double(forKey: Filters.minAreaKey)
-        maxArea = UserDefaults.standard.double(forKey: Filters.maxAreaKey)
-        bathroom = UserDefaults.standard.integer(forKey: Filters.bathroomKey)
-        bedrooms = UserDefaults.standard.integer(forKey: Filters.bedroomsKey)
-        if let sortRawValue = UserDefaults.standard.string(forKey: Filters.selectedSortKey),
+        minPrice = UserDefaults.standard.double(forKey: Constants.Filters.minPriceKey)
+        maxPrice = UserDefaults.standard.double(forKey: Constants.Filters.maxPriceKey)
+        minArea = UserDefaults.standard.double(forKey: Constants.Filters.minAreaKey)
+        maxArea = UserDefaults.standard.double(forKey: Constants.Filters.maxAreaKey)
+        bathroom = UserDefaults.standard.integer(forKey: Constants.Filters.bathroomKey)
+        bedrooms = UserDefaults.standard.integer(forKey: Constants.Filters.bedroomsKey)
+        if let sortRawValue = UserDefaults.standard.string(forKey: Constants.Filters.selectedSortKey),
                let savedSort = SortOptions(rawValue: sortRawValue) {
                 selectedSort = savedSort
             }
         }
         
         private func saveFilterValues() {
-            UserDefaults.standard.set(selectedType.rawValue, forKey: Filters.selectedTypeKey)
-            UserDefaults.standard.set(minPrice, forKey: Filters.minPriceKey)
-            UserDefaults.standard.set(maxPrice, forKey: Filters.maxPriceKey)
-            UserDefaults.standard.set(minArea, forKey: Filters.minAreaKey)
-            UserDefaults.standard.set(maxArea, forKey: Filters.maxAreaKey)
-            UserDefaults.standard.set(bathroom, forKey: Filters.bathroomKey)
-            UserDefaults.standard.set(bedrooms, forKey: Filters.bedroomsKey)
-            UserDefaults.standard.set(selectedSort.rawValue, forKey: Filters.selectedSortKey)
+            UserDefaults.standard.set(selectedType.rawValue, forKey: Constants.Filters.selectedTypeKey)
+            UserDefaults.standard.set(minPrice, forKey: Constants.Filters.minPriceKey)
+            UserDefaults.standard.set(maxPrice, forKey: Constants.Filters.maxPriceKey)
+            UserDefaults.standard.set(minArea, forKey: Constants.Filters.minAreaKey)
+            UserDefaults.standard.set(maxArea, forKey: Constants.Filters.maxAreaKey)
+            UserDefaults.standard.set(bathroom, forKey: Constants.Filters.bathroomKey)
+            UserDefaults.standard.set(bedrooms, forKey: Constants.Filters.bedroomsKey)
+            UserDefaults.standard.set(selectedSort.rawValue, forKey: Constants.Filters.selectedSortKey)
             
             print("Saved successfully")
         }

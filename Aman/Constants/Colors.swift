@@ -9,16 +9,16 @@ import SwiftUI
 
 struct Colors {
     struct Primary {
-        static let p50 = Color("Primary50")
-        static let p100 = Color("Primary100")
-        static let p200 = Color("Primary200")
-        static let p300 = Color("Primary300")
-        static let p400 = Color("Primary400")
-        static let p500 = Color("Primary500")
-        static let p600 = Color("Primary600")
-        static let p700 = Color("Primary700")
-        static let p800 = Color("Primary800")
-        static let p900 = Color("Primary900")
+        static let p50 = Color("Blue50")
+        static let p100 = Color("Blue100")
+        static let p200 = Color("Blue200")
+        static let p300 = Color("Blue300")
+        static let p400 = Color("Blue400")
+        static let p500 = Color("Blue500")
+        static let p600 = Color("Blue600")
+        static let p700 = Color("Blue700")
+        static let p800 = Color("Blue800")
+        static let p900 = Color("Blue900")
     }
     
     struct Secondary {

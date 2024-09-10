@@ -14,6 +14,7 @@ struct PropertyDelatisView: View {
     @State var isViewMorePress = false
     @State private var showDeleteConfirmation = false
     
+    @State private var isFavorite = false
    
     let property : Property
     
@@ -67,6 +68,10 @@ struct PropertyDelatisView: View {
         )
         .navigationBarBackButtonHidden()
         .ignoresSafeArea()
+        .scrollIndicators(.hidden)
+        .onAppear {
+            isFavorite = viewModel.favorites.contains(where: { $0.id == property.id })
+        }
         
         
     }
@@ -80,22 +85,9 @@ struct PropertyDelatisView: View {
                     Image(systemName: "house")
                     Text(property.type.rawValue)
                     Spacer()
-                    Button {
-                        withAnimation {
-                            //                                isFavorite.toggle()
-                        }
-                    } label: {
-                        Circle()
-                            .frame(width: 32, height: 32)
-                            .foregroundStyle(.white)
-                            .shadow(radius: 10)
-                            .overlay (alignment: .center) {
-                                Image("Favorite")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                            }
-                        
-                        
+                    FavoriteButton(isFavorite: $isFavorite) {
+                        isFavorite.toggle()
+                        viewModel.toggleFavorite(for: property)
                     }
                 }
                 .foregroundStyle(Colors.Neutrals.n600)

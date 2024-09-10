@@ -19,7 +19,7 @@ struct Property: Identifiable, Codable {
     let numberOfBathrooms: Int
     let size: Double // in square meters
     var imageUrls: [String] = [] // Stores the URLs of the images
-
+    let date: Date
     enum PropertyType: String, CaseIterable, Codable {
         case All
         case House
