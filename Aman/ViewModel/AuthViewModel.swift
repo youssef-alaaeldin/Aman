@@ -78,7 +78,7 @@ class AuthViewModel: ObservableObject {
     
     func validateEmail(_ email: String) -> ValidateState {
         if email.isEmpty {
-            return .invalid("Email annot be empty")
+            return .invalid("Email Cannot be empty")
         } else if !email.contains("@") {
             return .invalid("Invalid email format")
         }

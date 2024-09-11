@@ -21,7 +21,8 @@ struct RegisterView: View {
     @State private var signingUp = false
     @State private var loggingIn = false
     
-    @State private var showWarnings = false
+    @State private var showWarningsEmail = false
+    @State private var showWarningsPassword = false
     private let accountsImages = ["google", "facebook", "apple"]
     
     var body: some View {
@@ -167,9 +168,12 @@ struct RegisterView: View {
             }
             
             
-            CustomTextField(textValue: $authViewModel.email,showWarnings: $showWarnings ,placeHolder: "Enter email", keyboardType: .emailAddress, title: "Email")
+            CustomTextField(textValue: $authViewModel.email ,placeHolder: "Enter email", keyboardType: .emailAddress, title: "Email")
+                .onChange(of: authViewModel.email) { _, _ in
+                    showWarningsEmail = true
+                }
             
-            if showWarnings {
+            if showWarningsEmail {
                 if case .invalid(let message) = authViewModel.emailValidation {
                     HStack {
                         Image(systemName: "exclamationmark.circle")
@@ -180,9 +184,12 @@ struct RegisterView: View {
             }
             
             
-            CustomTextField(textValue: $authViewModel.password, isPasswordField: true , showWarnings: $showWarnings , placeHolder: "Enter password", keyboardType: .default, title: "Password")
+            CustomTextField(textValue: $authViewModel.password, isPasswordField: true , placeHolder: "Enter password", keyboardType: .default, title: "Password")
+                .onChange(of: authViewModel.password) { _, _ in
+                    showWarningsPassword = true 
+                }
             
-            if showWarnings {
+            if showWarningsPassword {
                 if case .invalid(let message) = authViewModel.passwordValidation {
                     HStack {
                         Image(systemName: "exclamationmark.circle")
@@ -219,7 +226,7 @@ struct RegisterView: View {
                 self.coordinator.push(.main)
                 reset()
             } catch {
-                showWarnings = true
+//                showWarnings = true
                 print("Error creating user \(error.localizedDescription)")
             }
             signingUp = false
@@ -237,7 +244,7 @@ struct RegisterView: View {
                 self.coordinator.push(.main)
                 reset()
             } catch {
-                showWarnings = true
+//                showWarnings = true
                 print("Error loging in \(error.localizedDescription)")
             }
             loggingIn = false
@@ -249,7 +256,8 @@ struct RegisterView: View {
         authViewModel.email = ""
         authViewModel.password = ""
         isChecked = false
-        showWarnings = false
+        showWarningsEmail = false
+        showWarningsPassword = false
         
     }
 }

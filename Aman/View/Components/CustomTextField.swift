@@ -76,9 +76,9 @@ struct CustomTextField: View {
                 .background(Colors.Neutrals.n100)
                 .clipShape(.rect(cornerRadius: 8))
                 .keyboardType(keyboardType)
-                .onChange(of: textValue) {
-                    showWarnings = true
-                }
+//                .onChange(of: textValue) {
+//                    showWarnings = true
+//                }
                 
             }
             
